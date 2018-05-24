@@ -7,6 +7,11 @@ describe file('/var/lib/aide/aide.db.gz') do
   it { should be_owned_by 'root' }
 end
 
+describe file('/var/lib/aide/aide.db.new.gz') do
+  it { should be_file }
+  it { should be_owned_by 'root' }
+end
+
 describe file('/var/lib/aide/aide.db') do
   it { should_not be_file }
 end
@@ -33,4 +38,3 @@ if %w(rhel fedora centos redhat).include?(os[:family])
     its('weekdays') { should cmp '*' }
   end
 end
-

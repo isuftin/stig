@@ -26,6 +26,11 @@ if %w(rhel fedora centos redhat).include?(os[:family])
     it { should be_owned_by 'root' }
   end
 
+  describe file('/var/lib/aide/aide.db.new.gz') do
+    it { should be_file }
+    it { should be_owned_by 'root' }
+  end
+
   describe crontab('root').commands('/usr/sbin/aide --check')  do
     its('minutes') { should cmp 0 }
     its('hours') { should cmp 5 }

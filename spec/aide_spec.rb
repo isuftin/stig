@@ -27,9 +27,16 @@ describe 'stig::aide CentOS 7.x' do
     expect(aide_config).to notify('execute[init_aide]').to(:run).delayed
   end
 
+  it 'should not run copy new to old database for RHEL' do
+    expect(chef_run).to_not create_remote_file('Copy new database to old')
+    resource = chef_run.remote_file('Copy new database to old')
+    expect(resource).to do_nothing
+  end
+
   it 'should not execute init_aide by default for RHEL' do
     exec_init_aide = chef_run.execute('init_aide')
     expect(exec_init_aide).to do_nothing
+    expect(exec_init_aide).to notify('remote_file[Copy new database to old]').to(:create).immediately
   end
 
   # 1.3.2

@@ -76,12 +76,25 @@ remote_file '/var/lib/aide/aide.db' do
   only_if { %w[debian ubuntu].include? platform }
 end
 
-aide_database = node['stig']['aide']['database'].gsub('@@{DBDIR}', node['stig']['aide']['dbdir'])
+db_dir = node['stig']['aide']['dbdir']
+aide_db_out_path = node['stig']['aide']['database_out'].gsub('file:', '').gsub('@@{DBDIR}', db_dir)
+aide_db_path = node['stig']['aide']['database'].gsub('file:', '').gsub('@@{DBDIR}', db_dir)
+
 execute 'init_aide' do
   user 'root'
-  command "/usr/sbin/aide --init -B 'database_out=#{aide_database}'"
+  command '/usr/sbin/aide --init'
   action :nothing
+  notifies :create, 'remote_file[Copy new database to old]', :immediate
   only_if { %w[rhel fedora centos redhat].include? platform }
+end
+
+# This ensures that we do not continue using the original database that was created
+# during the original init process
+remote_file 'Copy new database to old' do
+  source "file://#{aide_db_out_path}"
+  path aide_db_path
+  mode 0o600
+  action :nothing
 end
 
 cron 'aide_cron' do
@@ -92,4 +105,5 @@ cron 'aide_cron' do
   month '*'
   action :create
   not_if 'crontab -u root -l | grep aide'
+  only_if { %w[rhel fedora centos redhat].include? platform }
 end
