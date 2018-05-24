@@ -5,6 +5,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [UNRELEASED]
 ### Added
+-- [isuftin@usgs.gov] - No longer passing output database location to aide init
+command. Let aide get that from the conf file
+-- [isuftin@usgs.gov] - Use proper output database location during aide init
+-- [isuftin@usgs.gov] - Make sure to copy new aide database to old database location
+post-init
 -- [isuftin@usgs.gov] - Sticking to major version of CentOS in Test Kitchen
 -- [isuftin@usgs.gov] - STIG 6.1.6 - File permissions for /etc/passwd-
 -- [cpoma@mitre.org] - Added default["stig"]["mount_disable"]["disable_usb_storage"] to disable USB Storage. RHEL-06-000503 - CCI-001250
