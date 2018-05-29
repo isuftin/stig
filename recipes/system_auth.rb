@@ -8,6 +8,8 @@
 require 'pathname'
 
 platform = node['platform']
+platform_family = node['platform_family']
+major_version = node['platform_version'][0, 1].to_i
 
 pass_reuse_limit = node['stig']['system_auth']['pass_reuse_limit']
 pamd_dir = '/etc/pam.d'
@@ -70,4 +72,16 @@ template '/etc/pam.d/common-password' do
     pass_reuse_limit: pass_reuse_limit
   )
   only_if { %w[debian ubuntu].include? platform }
+end
+
+template '/etc/pam.d/postlogin-ac' do
+  source 'etc_pam.d_postlogin-ac.erb'
+  owner 'root'
+  group 'root'
+  mode 0o644
+  variables(
+    postlogin_ac_rules: node['stig']['pam_d']['config']['postlogin_ac_rules']
+  )
+  only_if { platform_family == 'rhel' }
+  only_if { major_version >= 7 }
 end

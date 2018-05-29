@@ -43,6 +43,7 @@ sysctl cookbook version >= 1.0.0
 -- [isuftin@usgs.gov] - Switched Changelog format
 -- [isuftin@usgs.gov] - Fixed styling for Rubocop 0.55.0
 -- [kdshah@mitre.org] - Added SSH private host key file permission to recipe/sshd_config.rb
+-- [kdshah@mitre.org] - updated system_auth to manage /etc/pam.d/postlogin-ac
 ### Fixed
 -- [cpoma@mitre.org] - Bugfix in stig/recipes/mail_transfer_agent.rb to use platform_family versus platform
 -- [cpoma@mitre.org] - Bugfix in stig/attributes/default.rb - Errors out and sshd dies (bricking machine) on RH 7

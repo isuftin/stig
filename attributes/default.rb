@@ -1664,3 +1664,8 @@ default['stig']['local_users']['nologin_shell']['user'] = %w[
   shutdown
   sync
 ]
+
+default['stig']['pam_d']['config']['postlogin_ac_rules'] = [
+  'session     [success=1 default=ignore] pam_succeed_if.so service !~ gdm* service !~ su* quiet',
+  'session     required      pam_lastlog.so showfailed'
+]
