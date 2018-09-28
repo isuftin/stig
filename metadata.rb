@@ -15,4 +15,4 @@ supports         'ubuntu'
 chef_version     '>= 12.0.0'
 
 depends          'logrotate'
-depends          'sysctl'
+depends          'sysctl' # ~FC121
