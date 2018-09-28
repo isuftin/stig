@@ -1,4 +1,4 @@
-name             'stig'
+name             'stig' # ~FC121
 maintainer       'USGS WSI'
 maintainer_email 'isuftin@usgs.gov'
 license          'CPL-1.0'
@@ -15,4 +15,4 @@ supports         'ubuntu'
 chef_version     '>= 12.0.0'
 
 depends          'logrotate'
-depends          'sysctl' # ~FC121
+depends          'sysctl'
