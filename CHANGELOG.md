@@ -3,6 +3,10 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.6.13] - 2018-09-28
+### Updated
+-- [isuftin@usgs.gov] - audits recipe is not tolerant of spaces in file paths
+
 ## [0.6.12] - 2018-06-08
 ### Added
 -- [isuftin@usgs.gov] - No longer passing output database location to aide init

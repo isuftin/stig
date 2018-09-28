@@ -19,14 +19,14 @@
 
 bash 'remove_world_writable_flag_from_files' do
   user 'root'
-  code "for fn in $(df --local -P | awk {'if (NR!=1) print $6'} | uniq | xargs -I '{}' find '{}' -xdev -type f -perm -0002);do chmod o-w $fn;done"
+  code "df --local -P | awk {'if (NR!=1) print $6'} | uniq | xargs -I '{}' find '{}' -xdev -type f -perm -0002 | while read fn ;do chmod o-w \"$fn\";done"
   only_if "test -n \"$(df --local -P | awk {'if (NR!=1) print $6'} | uniq | xargs -I '{}' find '{}' -xdev -type f -perm -0002)\"", user: 'root'
 end
 
 bash 'find user and group orphaned files and directories' do
   user 'root'
-  code "for fn in $(df --local -P | awk {'if (NR!=1) print $6'} | uniq | xargs -I '{}' find '{}' -xdev -nouser -nogroup -ls | awk '{ printf $11\"\\n\" }'); do chown root:root $fn;done"
-  only_if "test -n \"$(df --local -P | awk {'if (NR!=1) print $6'} | uniq | xargs -I '{}' find '{}' -xdev -nouser -nogroup -ls)\"", user: 'root'
+  code "df --local -P | awk {'if (NR!=1) print $6'} | uniq | xargs -I '{}' find '{}' -xdev -nouser -nogroup | while read fn;do chown root:root \"$fn\";done"
+  only_if "test -n \"$(df --local -P | awk {'if (NR!=1) print $6'} | uniq | xargs -I '{}' find '{}' -xdev -nouser -nogroup)\"", user: 'root'
 end
 
 bash 'no_empty_passwd_fields' do
