@@ -1,10 +1,10 @@
-name             'stig'
+name             'stig' # ~FC121
 maintainer       'USGS WSI'
 maintainer_email 'isuftin@usgs.gov'
 license          'CPL-1.0'
 description      'Installs/Configures CIS STIG benchmarks'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version          '0.6.12'
+version          '0.6.13'
 source_url       'https://github.com/USGS-CIDA/stig'
 issues_url       'https://github.com/USGS-CIDA/stig/issues'
 
