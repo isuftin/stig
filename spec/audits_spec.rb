@@ -24,7 +24,7 @@ describe 'stig::audits CentOS 7.x' do
   end
 
   before do
-    stub_command("test -n \"$(df --local -P | awk {'if (NR!=1) print $6'} | uniq | xargs -I '{}' find '{}' -xdev -nouser -nogroup)\"").and_return(true)
+    stub_command("test -n \"$(df --local -P | awk {'if (NR!=1) print $6'} | uniq | xargs -I '{}' find '{}' -xdev -ignore_readdir_race -nouser -nogroup)\"").and_return(true)
   end
 
   before do
@@ -69,7 +69,7 @@ describe 'stig::audits CentOS 7.x' do
   it 'checks for unowned files and directories' do
     expect(chef_run).to run_bash('find user and group orphaned files and directories').with(
       user: 'root',
-      code: "df --local -P | awk {'if (NR!=1) print $6'} | uniq | xargs -I '{}' find '{}' -xdev -nouser -nogroup | while read fn;do chown root:root \"$fn\";done"
+      code: "df --local -P | awk {'if (NR!=1) print $6'} | uniq | xargs -I '{}' find '{}' -xdev -ignore_readdir_race -nouser -nogroup | while read fn;do chown root:root \"$fn\";done"
     )
   end
 
@@ -105,7 +105,7 @@ describe 'stig::audits CentOS 6.x' do
   end
 
   before do
-    stub_command("test -n \"$(df --local -P | awk {'if (NR!=1) print $6'} | uniq | xargs -I '{}' find '{}' -xdev -nouser -nogroup)\"").and_return(true)
+    stub_command("test -n \"$(df --local -P | awk {'if (NR!=1) print $6'} | uniq | xargs -I '{}' find '{}' -xdev -ignore_readdir_race -nouser -nogroup)\"").and_return(true)
   end
 
   before do
@@ -150,7 +150,7 @@ describe 'stig::audits CentOS 6.x' do
   it 'checks for unowned files and directories' do
     expect(chef_run).to run_bash('find user and group orphaned files and directories').with(
       user: 'root',
-      code: "df --local -P | awk {'if (NR!=1) print $6'} | uniq | xargs -I '{}' find '{}' -xdev -nouser -nogroup | while read fn;do chown root:root \"$fn\";done"
+      code: "df --local -P | awk {'if (NR!=1) print $6'} | uniq | xargs -I '{}' find '{}' -xdev -ignore_readdir_race -nouser -nogroup | while read fn;do chown root:root \"$fn\";done"
     )
   end
 

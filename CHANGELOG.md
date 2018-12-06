@@ -3,6 +3,11 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.6.14] - 2018-12-06
+### Updated
+-- [mamcderm@usgs.gov] - add timeout to 
+                         increase timeout on aide init exec
+
 ## [0.6.13] - 2018-09-28
 ### Updated
 -- [isuftin@usgs.gov] - audits recipe is not tolerant of spaces in file paths

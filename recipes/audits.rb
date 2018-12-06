@@ -25,8 +25,9 @@ end
 
 bash 'find user and group orphaned files and directories' do
   user 'root'
-  code "df --local -P | awk {'if (NR!=1) print $6'} | uniq | xargs -I '{}' find '{}' -xdev -nouser -nogroup | while read fn;do chown root:root \"$fn\";done"
-  only_if "test -n \"$(df --local -P | awk {'if (NR!=1) print $6'} | uniq | xargs -I '{}' find '{}' -xdev -nouser -nogroup)\"", user: 'root'
+  timeout 7200
+  code "df --local -P | awk {'if (NR!=1) print $6'} | uniq | xargs -I '{}' find '{}' -xdev -ignore_readdir_race -nouser -nogroup | while read fn;do chown root:root \"$fn\";done"
+  only_if "test -n \"$(df --local -P | awk {'if (NR!=1) print $6'} | uniq | xargs -I '{}' find '{}' -xdev -ignore_readdir_race -nouser -nogroup)\"", user: 'root'
 end
 
 bash 'no_empty_passwd_fields' do
