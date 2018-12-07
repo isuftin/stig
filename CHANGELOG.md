@@ -3,10 +3,9 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [0.6.14] - 2018-12-06
+## [0.6.14] - 2018-12-07
 ### Updated
--- [mamcderm@usgs.gov] - add timeout to 
-                         increase timeout on aide init exec
+-- [mamcderm@usgs.gov] - increase timeouts
 
 ## [0.6.13] - 2018-09-28
 ### Updated
