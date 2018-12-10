@@ -14,6 +14,10 @@ default['stig']['limits'] = [
   }
 ]
 
+# Audit configuration
+default['stig']['audits']['bash_timeout'] = 7200
+default['stig']['audits']['guard_timeout'] = 7200
+
 # Aide configuration
 # See https://linux.die.net/man/5/aide.conf
 default['stig']['aide']['config_file'] = '/etc/aide.conf'
@@ -23,6 +27,7 @@ default['stig']['aide']['database'] = 'file:@@{DBDIR}/aide.db.gz'
 default['stig']['aide']['database_out'] = 'file:@@{DBDIR}/aide.db.new.gz'
 default['stig']['aide']['gzip_dbout'] = true
 default['stig']['aide']['verbose'] = 5
+default['stig']['aide']['timeout'] = 7200
 default['stig']['aide']['report_url'] = [
   'file:@@{LOGDIR}/aide.log',
   'stdout'

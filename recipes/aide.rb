@@ -83,6 +83,7 @@ aide_db_path = node['stig']['aide']['database'].gsub('file:', '').gsub('@@{DBDIR
 execute 'init_aide' do
   user 'root'
   command '/usr/sbin/aide --init'
+  timeout node['stig']['aide']['timeout']
   action :nothing
   notifies :create, 'remote_file[Copy new database to old]', :immediate
   only_if { %w[rhel fedora centos redhat].include? platform }

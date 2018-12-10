@@ -3,6 +3,12 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.6.14] - 2018-12-07
+### Added
+-- [mamcderm@usgs.gov] - add timeout on init_aide resource in aide.rb
+-- [mamcderm@usgs.gov] - add timeout on 'find user and group orphaned files and directories' resource in audits.rb
+-- [mamcderm@usgs.gov] - add ignore_readdir_race flag to commands in 'find user and group orphaned files and directories' resource in audits.rb
+
 ## [0.6.13] - 2018-09-28
 ### Updated
 -- [isuftin@usgs.gov] - audits recipe is not tolerant of spaces in file paths
