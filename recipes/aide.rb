@@ -55,6 +55,7 @@ template node['stig']['aide']['config_file'] do
   source 'aide.conf.erb'
   variables(config: aide_config)
   only_if { %w[rhel fedora centos redhat].include? platform }
+  notifies :run, 'execute[update_aide]', :delayed
   notifies :run, 'execute[init_aide]', :delayed
 end
 
@@ -87,6 +88,17 @@ execute 'init_aide' do
   action :nothing
   notifies :create, 'remote_file[Copy new database to old]', :immediate
   only_if { %w[rhel fedora centos redhat].include? platform }
+  not_if { ::File.exist?(aide_db_out_path) }
+end
+
+execute 'update_aide' do
+  user 'root'
+  command '/usr/sbin/aide --update'
+  timeout node['stig']['aide']['timeout']
+  action :nothing
+  notifies :create, 'remote_file[Copy new database to old]', :immediate
+  only_if { %w[rhel fedora centos redhat].include? platform }
+  only_if { ::File.exist?(aide_db_out_path) }
 end
 
 # This ensures that we do not continue using the original database that was created
