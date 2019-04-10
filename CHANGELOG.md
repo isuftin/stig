@@ -2,6 +2,12 @@
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
+## [Unreleased]
+
+## [0.6.15] - 2019-04-10
+### Added
+-- [isuftin@usgs.gov] - Logic introduced as to whether aide should run init or update
+  based on whether or not the aide database already exists
 
 ## [0.6.14] - 2018-12-07
 ### Added
