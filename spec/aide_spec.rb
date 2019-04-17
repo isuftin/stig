@@ -25,7 +25,6 @@ describe 'stig::aide CentOS 7.x' do
   it 'should notify aide to initialize database for RHEL' do
     aide_config = chef_run.template('/etc/aide.conf')
     expect(aide_config).to notify('execute[init_aide]').to(:run).delayed
-    expect(aide_config).to notify('execute[update_aide]').to(:run).delayed
   end
 
   it 'should not run copy new to old database for RHEL' do
@@ -38,11 +37,6 @@ describe 'stig::aide CentOS 7.x' do
     exec_init_aide = chef_run.execute('init_aide')
     expect(exec_init_aide).to do_nothing
     expect(exec_init_aide).to notify('remote_file[Copy new database to old]').to(:create).immediately
-  end
-  it 'should not execute update_aide by default for RHEL' do
-    exec_update_aide = chef_run.execute('update_aide')
-    expect(exec_update_aide).to do_nothing
-    expect(exec_update_aide).to notify('remote_file[Copy new database to old]').to(:create).immediately
   end
 
   # 1.3.2
@@ -90,19 +84,12 @@ describe 'stig::aide CentOS 6.x' do
   it 'should notify aide to initialize database for RHEL' do
     aide_config = chef_run.template('/etc/aide.conf')
     expect(aide_config).to notify('execute[init_aide]').to(:run).delayed
-    expect(aide_config).to notify('execute[update_aide]').to(:run).delayed
   end
 
   it 'should not execute init_aide by default for RHEL' do
     exec_init_aide = chef_run.execute('init_aide')
     expect(exec_init_aide).to do_nothing
   end
-
-  it 'should not execute update_aide by default for RHEL' do
-    exec_update_aide = chef_run.execute('update_aide')
-    expect(exec_update_aide).to do_nothing
-  end
-
   # 1.3.2
   it 'checks for aide on a schedule' do
     expect(chef_run).to create_cron('aide_cron').with(
