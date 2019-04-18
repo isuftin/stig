@@ -3,10 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
+
+### Changed
+
+-- [isuftin@usgs.gov] - Changed maintainer to USGS WMA EB
+
 ### Removed
 
 -- [isuftin@usgs.gov] - Removed aide update command as it creates error codes where
-init does not 
+init does not
 
 ## [0.6.15] - 2019-04-10
 ### Added

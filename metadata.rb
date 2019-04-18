@@ -1,5 +1,5 @@
 name             'stig' # ~FC121
-maintainer       'USGS WSI'
+maintainer       'USGS WMA EB'
 maintainer_email 'isuftin@usgs.gov'
 license          'CPL-1.0'
 description      'Installs/Configures CIS STIG benchmarks'
