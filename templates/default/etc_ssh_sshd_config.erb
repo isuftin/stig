@@ -4,196 +4,306 @@
 #
 # See https://github.com/USGS-CIDA/stig/blob/master/templates/default/etc_ssh_sshd_config.erb
 
+<% if @accept_env -%>
 <% @accept_env.each do |ae| -%>
 AcceptEnv <%= ae %>
 <% end -%>
+<% end -%>
 
+<% if @address_family -%>
 AddressFamily <%= @address_family %>
+<% end -%>
 
+<% if @allow_agent_forwarding -%>
 AllowAgentForwarding <%= @allow_agent_forwarding %>
+<% end -%>
 
-<% if !@allow_groups.empty? -%>
+<% if @allow_groups && !@allow_groups.empty? -%>
 AllowGroups <%= @allow_groups.join(",") %>
 <% end -%>
 
+<% if @allow_tcp_forwarding -%>
 AllowTcpForwarding <%= @allow_tcp_forwarding %>
+<% end -%>
 
-<% if !@allow_users.empty? -%>
+<% if @allow_users && !@allow_users.empty? -%>
 AllowUsers <%= @allow_users.join(",") %>
 <% end -%>
 
-<% if !@authentication_methods.empty? -%>
+<% if @authentication_methods && !@authentication_methods.empty? -%>
 AuthenticationMethods <%= @authentication_methods.join(",") %>
 <% end -%>
 
-<% if !@authorized_keys_command.empty? -%>
+<% if @authorized_keys_command && !@authorized_keys_command.empty? -%>
 AuthorizedKeysCommand <%= @authorized_keys_command %>
 <% end -%>
 
-<% if !@authorized_keys_command_user.empty? -%>
+<% if @authorized_keys_command_user && !@authorized_keys_command_user.empty? -%>
 AuthorizedKeysCommandUser <%= @authorized_keys_command_user %>
 <% end -%>
 
-<% if !@authorized_keys_command_run_as.empty? -%>
+<% if @authorized_keys_command_run_as && !@authorized_keys_command_run_as.empty? -%>
 AuthorizedKeysCommandRunAs <%= @authorized_keys_command_run_as %>
 <% end -%>
 
-<% if !@authorized_keys_file.empty? -%>
+<% if @authorized_keys_file && !@authorized_keys_file.empty? -%>
 AuthorizedKeysFile <%= @authorized_keys_file %>
 <% end -%>
 
-<% if !@authorized_principals_file.empty? -%>
+<% if @authorized_principals_file && !@authorized_principals_file.empty? -%>
 AuthorizedPrincipalsFile <%= @authorized_principals_file %>
 <% end -%>
 
+<% if @banner_path -%>
 Banner <%= @banner_path %>
+<% end -%>
 
+<% if @challenge_response_authentication -%>
 ChallengeResponseAuthentication <%= @challenge_response_authentication %>
+<% end -%>
 
+<% if @chroot_directory -%>
 ChrootDirectory <%= @chroot_directory %>
+<% end -%>
 
+<% if @ciphers -%>
 Ciphers <%= @ciphers %>
+<% end -%>
 
+<% if @client_alive_count_max -%>
 ClientAliveCountMax <%= @client_alive_count_max %>
+<% end -%>
 
+<% if @client_alive_interval -%>
 ClientAliveInterval <%= @client_alive_interval %>
+<% end -%>
 
+<% if @compression -%>
 Compression <%= @compression %>
+<% end -%>
 
-<% if !@deny_groups.empty? -%>
+<% if @deny_groups && !@deny_groups.empty? -%>
 DenyGroups <%= @deny_groups.join(",") %>
 <% end -%>
 
-<% if !@deny_users.empty? -%>
+<% if @deny_users && !@deny_users.empty? -%>
 DenyUsers <%= @deny_users.join(",") %>
 <% end -%>
 
-<% if !@force_command.empty? -%>
+<% if @force_command && !@force_command.empty? -%>
 ForceCommand <%= @force_command %>
 <% end -%>
 
+<% if @gateway_ports -%>
 GatewayPorts <%= @gateway_ports %>
+<% end -%>
 
-<% if !@gss_api_authentication.empty? -%>
+<% if @gss_api_authentication && !@gss_api_authentication.empty? -%>
 GSSAPIAuthentication <%= @gss_api_authentication %>
 <% end -%>
 
-<% if !@gss_cleanup_credentials.empty? -%>
+<% if @gss_cleanup_credentials && !@gss_cleanup_credentials.empty? -%>
 GSSAPICleanupCredentials <%= @gss_cleanup_credentials %>
 <% end -%>
 
-<% if !@gss_api_key_exchange.empty? -%>
+<% if @gss_api_key_exchange && !@gss_api_key_exchange.empty? -%>
 GSSAPIKeyExchange <%= @gss_api_key_exchange %>
 <% end -%>
 
+<% if @gss_api_store_credentials_on_rekey -%>
 GSSAPIStoreCredentialsOnRekey <%= @gss_api_store_credentials_on_rekey %>
+<% end -%>
 
+<% if @gss_api_strict_acceptor_check -%>
 GSSAPIStrictAcceptorCheck <%= @gss_api_strict_acceptor_check %>
+<% end -%>
 
-<% if !@host_based_auth.empty? -%>
+<% if @host_based_auth && !@host_based_auth.empty? -%>
 HostbasedAuthentication <%= @host_based_auth %>
 <% end -%>
 
+<% if @host_based_uses_name_from_packet_only -%>
 HostbasedUsesNameFromPacketOnly <%= @host_based_uses_name_from_packet_only %>
+<% end -%>
 
-<% if !@host_certificate.empty? -%>
+<% if @host_certificate && !@host_certificate.empty? -%>
 HostCertificate <%= @host_certificate %>
 <% end -%>
 
+<% if @host_key -%>
 <% @host_key.each do |hk| -%>
 HostKey <%= hk %>
 <% end -%>
+<% end -%>
 
+<% if @ignore_rhosts -%>
 IgnoreRhosts <%= @ignore_rhosts %>
+<% end -%>
 
+<% if @ignore_user_known_hosts -%>
 IgnoreUserKnownHosts <%= @ignore_user_known_hosts %>
+<% end -%>
 
+<% if @kerberos_authentication -%>
 KerberosAuthentication <%= @kerberos_authentication %>
+<% end -%>
 
+<% if @kerberos_or_local_passwd -%>
 KerberosOrLocalPasswd <%= @kerberos_or_local_passwd %>
+<% end -%>
 
+<% if @kerberos_ticket_cleanup -%>
 KerberosTicketCleanup <%= @kerberos_ticket_cleanup %>
+<% end -%>
 
+<% if @kerberos_use_kuserok -%>
 KerberosUseKuserok <%= @kerberos_use_kuserok %>
+<% end -%>
 
+<% if @key_regeneration_interval -%>
 KeyRegenerationInterval <%= @key_regeneration_interval %>
+<% end -%>
 
+<% if @port -%>
 <% @port.each do |pr| -%>
 Port <%= pr %>
 <% end -%>
+<% end -%>
 
+<% if @listen_address -%>
 <% @listen_address.each do |la| -%>
 ListenAddress <%= la %>
 <% end -%>
+<% end -%>
 
+<% if @login_grace_time -%>
 LoginGraceTime <%= @login_grace_time %>
+<% end -%>
 
+<% if @log_level -%>
 LogLevel <%= @log_level %>
+<% end -%>
 
+<% if @macs -%>
 MACs <%= @macs %>
+<% end -%>
 
+<% if @max_auth_tries -%>
 MaxAuthTries <%= @max_auth_tries %>
+<% end -%>
 
+<% if @max_sessions -%>
 MaxSessions <%= @max_sessions %>
+<% end -%>
 
+<% if @max_startups -%>
 MaxStartups <%= @max_startups %>
+<% end -%>
 
+<% if @password_authentication -%>
 PasswordAuthentication <%= @password_authentication %>
+<% end -%>
 
+<% if @permit_empty_passwords -%>
 PermitEmptyPasswords <%= @permit_empty_passwords %>
+<% end -%>
 
+<% if @permit_root_login -%>
 PermitRootLogin <%= @permit_root_login %>
+<% end -%>
 
+<% if @permit_tunnel -%>
 PermitTunnel <%= @permit_tunnel %>
+<% end -%>
 
+<% if @allow_users_set_env_opts -%>
 PermitUserEnvironment <%= @allow_users_set_env_opts %>
+<% end -%>
 
+<% if @pid_file -%>
 PidFile <%= @pid_file %>
+<% end -%>
 
+<% if @print_motd -%>
 PrintMotd <%= @print_motd %>
+<% end -%>
 
+<% if @protocol -%>
 Protocol <%= @protocol %>
+<% end -%>
 
+<% if @print_last_log -%>
 PrintLastLog <%= @print_last_log %>
+<% end -%>
 
+<% if @pub_key_authentication -%>
 PubkeyAuthentication <%= @pub_key_authentication %>
+<% end -%>
 
+<% if @rhosts_rsa_authentication -%>
 RhostsRSAAuthentication <%= @rhosts_rsa_authentication %>
+<% end -%>
 
+<% if @rsa_authentication -%>
 RSAAuthentication <%= @rsa_authentication %>
+<% end -%>
 
+<% if @server_key_bits -%>
 ServerKeyBits <%= @server_key_bits %>
+<% end -%>
 
-<% if !@show_patch_level.empty? -%>
+<% if @show_patch_level && !@show_patch_level.empty? -%>
 ShowPatchLevel <%= @show_patch_level %>
 <% end -%>
 
+<% if @strict_modes -%>
 StrictModes <%= @strict_modes %>
+<% end -%>
 
+<% if @subsystem -%>
 Subsystem	<%= @subsystem %>
+<% end -%>
 
+<% if @syslog_facility -%>
 SyslogFacility <%= @syslog_facility %>
+<% end -%>
 
+<% if @tcp_keepalive -%>
 TCPKeepAlive  <%= @tcp_keepalive %>
+<% end -%>
 
+<% if @use_dns -%>
 UseDNS <%= @use_dns %>
+<% end -%>
 
+<% if @use_login -%>
 UseLogin <%= @use_login %>
+<% end -%>
 
+<% if @use_pam_auth -%>
 UsePAM <%= @use_pam_auth %>
+<% end -%>
 
+<% if @use_privilege_separation -%>
 UsePrivilegeSeparation <%= @use_privilege_separation %>
+<% end -%>
 
-<% if !@version_addendum.empty? -%>
+<% if @version_addendum && !@version_addendum.empty? -%>
 VersionAddendum <%= @version_addendum %>
 <% end -%>
 
+<% if @x_11_display_offset -%>
 X11DisplayOffset <%= @x_11_display_offset %>
+<% end -%>
 
+<% if @x_11_forwarding -%>
 X11Forwarding <%= @x_11_forwarding %>
+<% end -%>
 
+<% if @x_11_use_local_host -%>
 X11UseLocalhost <%= @x_11_use_local_host %>
+<% end -%>
 
-<% if !@x_auth_location.empty? -%>
+<% if @x_auth_location && !@x_auth_location.empty? -%>
 XAuthLocation <%= @x_auth_location %>
 <% end -%>

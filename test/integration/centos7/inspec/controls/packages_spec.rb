@@ -1,12 +1,12 @@
-DISABLED_PKGS = attribute(
+DISABLED_PKGS = input(
   'disabled_pkgs',
-  default: ['dhcp'],
+  value: ['dhcp'],
   description: "The list of packages that we want to ensure are not installed"
 )
 
-ENABLED_PKGS = attribute(
+ENABLED_PKGS = input(
   'enabled_pkgs',
-  default: ['tcp_wrappers'],
+  value: ['tcp_wrappers'],
   description: "The list of packages that we want to ensure are not installed"
 )
 

@@ -1,6 +1,6 @@
-PAM_LINES= attribute(
+PAM_LINES= input(
   'pam_lines',
-  default:[
+  value:[
     %r{^auth\s+required\s+pam_env.so},
     %r{^auth\s+required\s+pam_faillock.so\spreauth\saudit\ssilent\sdeny=5\sunlock_time=900},
     %r{^auth\s+sufficient\s+pam_unix.so\snullok\stry_first_pass},

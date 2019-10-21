@@ -300,6 +300,7 @@ default['stig']['aide']['paths_rhel']['default'] = {
 }
 
 # See http://man7.org/linux/man-pages/man5/auditd.conf.5.html
+default['stig']['auditd']['config_dir'] = '/etc/audit'
 default['stig']['auditd']['log_file'] = '/var/log/audit/audit.log'
 default['stig']['auditd']['log_format'] = 'RAW'
 default['stig']['auditd']['log_group'] = 'root'
@@ -582,6 +583,10 @@ default['stig']['selinux']['enabled'] = true
 default['stig']['selinux']['status'] = 'enforcing'
 # Possible values: targeted, mls
 default['stig']['selinux']['type'] = 'targeted'
+
+# SSHD Configuration
+# Comment out any of these elements to keep them out of sshd config file. Some
+# of these may be deprecated in your version of sshd
 
 # Specifies whether TCP forwarding is permitted. Allowed values:
 # 'yes', 'all', 'no', 'local', 'remote'

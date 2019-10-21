@@ -4,15 +4,15 @@
 # UBUNTU 2.18,UBUNTU 2.19,UBUNTU 2.20,UBUNTU 2.21,UBUNTU 2.22,UBUNTU 2.23
 # UBUNTU 2.24,UBUNTU 7.5.1, UBUNTU 7.5.4,UBUNTU 7.5.2, UBUNTU 7.5.3
 # attributes
-BLACKLISTED_MODULES = attribute(
+BLACKLISTED_MODULES = input(
   'blacklisted_modules',
-  default: ['cramfs','vfat','cramfs','freevxfs','jffs2','hfs','hfsplus',
+  value: ['cramfs','vfat','cramfs','freevxfs','jffs2','hfs','hfsplus',
     'squashfs','udf'],
   description: "The modules on the system that we wish to blacklist.")
 
-  BLACKLISTED_MODULES_CONF_FILE = attribute(
+  BLACKLISTED_MODULES_CONF_FILE = input(
   'blacklist_conf_file',
-  default: '/etc/modprobe.d/CIS.conf',
+  value: '/etc/modprobe.d/CIS.conf',
   description: "The file location of where you keep your blacklisted modules
   configuration file."
   )

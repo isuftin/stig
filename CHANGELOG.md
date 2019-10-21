@@ -4,6 +4,21 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 
+### Added
+-- [isuftin@usgs.gov] - auditd cookbook in metadata.rb as a hard dependency
+
+### Changed
+-- [isuftin@usgs.gov] - Including auditd cookbook call directly in auditd recipe
+-- [isuftin@usgs.gov] - Allowing auditd base config dir to be configurable in attributes
+-- [isuftin@usgs.gov] - Allow not using known sshd attributes to keep them out of sshd
+config file
+
+### Fixed
+-- [isuftin@usgs.gov] - auditd service reloading. A temp fix until https://github.com/chef-cookbooks/auditd/issues/55
+is dealt with
+-- [isuftin@usgs.gov] - inspec and unit tests
+
+
 ## [0.6.16] - 2019-04-22
 
 ### Changed

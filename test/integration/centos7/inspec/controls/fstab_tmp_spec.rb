@@ -1,41 +1,47 @@
+control 'fstab' do
+  impact 'medium'
+  title 'fstab: Check that fstab mounts are configured'
+  tag 'fstab'
 
-describe file('/dev/shm') do
-  it { should be_mounted }
+  describe file('/dev/shm') do
+    it { should be_mounted }
+  end
+
+  describe command('grep /dev/shm /etc/fstab | grep nodev') do
+    its(:stdout) { should match /nodev/ }
+  end
+
+  describe mount("/dev/shm") do
+    its("options") { should include "nodev" }
+  end
+
+  describe command('grep /dev/shm /etc/fstab | grep nosuid') do
+    its(:stdout) { should match /nosuid/ }
+  end
+
+  describe mount("/dev/shm") do
+    its("options") { should include "nosuid" }
+  end
+
+  describe command('grep /dev/shm /etc/fstab | grep noexec') do
+    its(:stdout) { should match /noexec/ }
+  end
+
+  describe mount("/dev/shm") do
+    its("options") { should include "noexec" }
+  end
+
+  describe command('mount | grep /var/tmp') do
+    its(:stdout) { should include('/var/tmp') }
+  end
+
+  # TODO: Deal with failing test
+  describe mount('/var/tmp') do
+    it { should be_mounted }
+    its('options') { should include 'rw' }
+   end
+
 end
-
-describe command('grep /dev/shm /etc/fstab | grep nodev') do
-  its(:stdout) { should match /nodev/ }
-end
-
-describe mount("/dev/shm") do
-  its("options") { should include "nodev" }
-end
-
-describe command('grep /dev/shm /etc/fstab | grep nosuid') do
-  its(:stdout) { should match /nosuid/ }
-end
-
-describe mount("/dev/shm") do
-  its("options") { should include "nosuid" }
-end
-
-describe command('grep /dev/shm /etc/fstab | grep noexec') do
-  its(:stdout) { should match /noexec/ }
-end
-
-describe mount("/dev/shm") do
-  its("options") { should include "noexec" }
-end
-
-describe command('mount | grep /var/tmp') do
-  its(:stdout) { should include('/var/tmp') }
-end
-
-# TODO: Deal with failing test
-describe mount('/var/tmp') do
-  it { should be_mounted }
-  its('options') { should include 'rw' }
- end
 
 # FIXME: See the note below for the fix to the remediation
 #describe file("/etc/fstab") do

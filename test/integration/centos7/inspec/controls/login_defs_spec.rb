@@ -1,18 +1,18 @@
-PASS_MAX_DAYS = attribute(
+PASS_MAX_DAYS = input(
   'pass_max_days',
-  default: "60",
+  value: "60",
   description: "The maximum numbers of days a password is valid"
 )
 
-PASS_MIN_DAYS = attribute(
+PASS_MIN_DAYS = input(
   'pass_min_days',
-  default: "7",
+  value: "7",
   description:"The minimum number of days before you can change your password"
 )
 
-PASS_WARN_AGE= attribute(
+PASS_WARN_AGE= input(
   'pass_warn_age',
-  default: "15",
+  value: "15",
   description:"The number of days you are notified before you password expires"
 )
 

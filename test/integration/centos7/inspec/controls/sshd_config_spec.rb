@@ -1,12 +1,12 @@
-SSHD_PORT = attribute(
+SSHD_PORT = input(
   'sshd_port',
-  default: 22,
+  value: 22,
   description: "The desired port that the sshd server should listen on"
 )
 
-SSHD_CONFIG_FILE = attribute(
+SSHD_CONFIG_FILE = input(
 'sshd_config_file',
-default: '/etc/ssh/sshd_config',
+value: '/etc/ssh/sshd_config',
 description: "The location for your sshd_config file on the filesystem"
 )
 

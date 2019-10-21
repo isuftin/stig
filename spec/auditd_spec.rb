@@ -12,8 +12,8 @@ describe 'stig::auditd CentOS 7.x' do
       end
     end
 
-    it 'creates a directory /etc/audit/' do
-      expect(chef_run).to create_directory('/etc/audit/')
+    it 'creates a directory /etc/audit' do
+      expect(chef_run).to create_directory('/etc/audit')
     end
 
 
@@ -41,8 +41,8 @@ describe 'stig::auditd CentOS 6.x' do
       end
     end
 
-    it 'creates a directory /etc/audit/' do
-      expect(chef_run).to create_directory('/etc/audit/')
+    it 'creates a directory /etc/audit' do
+      expect(chef_run).to create_directory('/etc/audit')
     end
 
     it 'creates a template /etc/audit/auditd.conf' do

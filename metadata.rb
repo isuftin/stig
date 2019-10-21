@@ -4,7 +4,7 @@ maintainer_email 'isuftin@usgs.gov'
 license          'CPL-1.0'
 description      'Installs/Configures CIS STIG benchmarks'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version          '0.6.16'
+version          '0.6.17'
 source_url       'https://github.com/USGS-CIDA/stig'
 issues_url       'https://github.com/USGS-CIDA/stig/issues'
 
@@ -14,5 +14,6 @@ supports         'ubuntu'
 
 chef_version     '>= 12.0.0'
 
+depends          'auditd'
 depends          'logrotate'
 depends          'sysctl'

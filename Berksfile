@@ -2,7 +2,7 @@ source 'https://supermarket.getchef.com'
 
 metadata
 
-cookbook 'auditd', '~> 2.2.0'
+cookbook 'auditd', '~> 2.3.4'
 cookbook 'logrotate', '~> 2.2.0'
 cookbook 'sysctl'
 
