@@ -18,13 +18,12 @@
 # - Set SSH PermitEmptyPasswords to No
 # - Do Not Allow Users to Set Environment Options
 # - Limit Access via SSH
+# For CentOS 7.x, using https://www.freebsd.org/cgi/man.cgi?query=ssh_config&sektion=5&apropos=0&manpath=FreeBSD+7.4-RELEASE
 
 vars = node['stig']['sshd_config'].dup
 
-if node['stig']['sshd_config'].attribute?('allow_tcp_forwarding')
-  valid_allow_tcp_forwarding_values = %w[yes no local remote all]
-  raise "node['stig']['sshd_config']['allow_tcp_forwarding'] must be one of #{valid_allow_tcp_forwarding_values}" unless valid_allow_tcp_forwarding_values.include?(vars['allow_tcp_forwarding'])
-end
+valid_allow_tcp_forwarding_values = %w[yes no local remote all]
+raise "node['stig']['sshd_config']['allow_tcp_forwarding'] must be one of #{valid_allow_tcp_forwarding_values}" unless vars['allow_tcp_forwarding'].nil? || valid_allow_tcp_forwarding_values.include?(vars['allow_tcp_forwarding'])
 
 # Check if the following attributes have a yes/no String assigned
 %w[
@@ -61,19 +60,16 @@ end
   x_11_forwarding
   x_11_use_local_host
 ].each do |v|
-  if node['stig']['sshd_config'].attribute?(v)
-    raise "node['stig']['sshd_config']['#{v}'] must be a 'yes' or 'no'" unless %w[yes no].include?(vars[v])
-  end
+  raise "node['stig']['sshd_config']['#{v}'] must be a 'yes' or 'no'" unless vars[v].nil? || %w[yes no].include?(vars[v])
 end
 
 # Check that an attribute is an array
 %w[
   host_key
+  permit_open
   port
 ].each do |a|
-  if node['stig']['sshd_config'].attribute?(a)
-    raise "node['stig']['sshd_config']['#{a}'] must be an array" unless vars[a].is_a?(Array)
-  end
+  raise "node['stig']['sshd_config']['#{a}'] must be an array" unless vars[a].nil? || vars[a].is_a?(Array)
 end
 
 %w[
@@ -86,45 +82,30 @@ end
   client_alive_interval
   client_alive_count_max
 ].each do |i|
-  if node['stig']['sshd_config'].attribute?(i)
-    raise "node['stig']['sshd_config']['#{i}'] must be an integer" unless vars[i].is_a?(Integer)
-  end
+  raise "node['stig']['sshd_config']['#{i}'] must be an integer" unless vars[i].nil? || vars[i].is_a?(Integer)
+
 end
 
-if node['stig']['sshd_config'].attribute?('address_family')
-  valid_address_family = %w[any inet inet6]
-  raise "node['stig']['sshd_config']['address_family'] must be one of #{valid_address_family}" unless valid_address_family.include?(vars['address_family'])
-end
+valid_address_family = %w[any inet inet6]
+raise "node['stig']['sshd_config']['address_family'] must be one of #{valid_address_family}" unless vars['address_family'].nil? || valid_address_family.include?(vars['address_family'])
 
-if node['stig']['sshd_config'].attribute?('protocol')
-  valid_protocols = %w[1 2 1,2 2,1]
-  raise "node['stig']['sshd_config']['protocol'] must be one of #{valid_protocols}" unless valid_protocols.include?(vars['protocol'])
-end
+valid_protocols = %w[1 2 1,2 2,1]
+raise "node['stig']['sshd_config']['protocol'] must be one of #{valid_protocols}" unless vars['protocol'].nil? || valid_protocols.include?(vars['protocol'])
 
-if node['stig']['sshd_config'].attribute?('gateway_ports')
-  valid_gateway_ports = %w[yes no clientspecified]
-  raise "node['stig']['sshd_config']['gateway_ports'] must be one of #{valid_gateway_ports}" unless valid_gateway_ports.include?(vars['gateway_ports'])
-end
+valid_gateway_ports = %w[yes no clientspecified]
+raise "node['stig']['sshd_config']['gateway_ports'] must be one of #{valid_gateway_ports}" unless vars['gateway_ports'].nil? || valid_gateway_ports.include?(vars['gateway_ports'])
 
-if node['stig']['sshd_config'].attribute?('compression')
-  valid_compression = %w[yes no delayed]
-  raise "node['stig']['sshd_config']['compression'] must be one of #{valid_compression}" unless valid_compression.include?(vars['compression'])
-end
+valid_compression = %w[yes no delayed]
+raise "node['stig']['sshd_config']['compression'] must be one of #{valid_compression}" unless vars['compression'].nil? || valid_compression.include?(vars['compression'])
 
-if node['stig']['sshd_config'].attribute?('log_level')
-  valid_log_level = %w[QUIET FATAL ERROR INFO	VERBOSE DEBUG DEBUG1 DEBUG2 DEBUG3]
-  raise "node['stig']['sshd_config']['log_level'] must be one of #{valid_log_level}" unless valid_log_level.include?(vars['log_level'])
-end
+valid_log_level = %w[QUIET FATAL ERROR INFO	VERBOSE DEBUG DEBUG1 DEBUG2 DEBUG3]
+raise "node['stig']['sshd_config']['log_level'] must be one of #{valid_log_level}" unless vars['log_level'].nil? || valid_log_level.include?(vars['log_level'])
 
-if node['stig']['sshd_config'].attribute?('permit_tunnel')
-  valid_permit_tunnel = %w[yes no ethernet point-to-point]
-  raise "node['stig']['sshd_config']['permit_tunnel'] must be one of #{valid_permit_tunnel}" unless valid_permit_tunnel.include?(vars['permit_tunnel'])
-end
+valid_permit_tunnel = %w[yes no ethernet point-to-point]
+raise "node['stig']['sshd_config']['permit_tunnel'] must be one of #{valid_permit_tunnel}" unless vars['permit_tunnel'].nil? || valid_permit_tunnel.include?(vars['permit_tunnel'])
 
-if node['stig']['sshd_config'].attribute?('syslog_facility')
-  valid_syslog_facility_level = %w[DAEMON USER AUTH AUTHPRIV LOCAL0 LOCAL1 LOCAL2 LOCAL3 LOCAL4 LOCAL5 LOCAL6 LOCAL7]
-  raise "node['stig']['sshd_config']['syslog_facility'] must be one of #{valid_syslog_facility_level}" unless valid_syslog_facility_level.include?(vars['syslog_facility'])
-end
+valid_syslog_facility_level = %w[DAEMON USER AUTH AUTHPRIV LOCAL0 LOCAL1 LOCAL2 LOCAL3 LOCAL4 LOCAL5 LOCAL6 LOCAL7]
+raise "node['stig']['sshd_config']['syslog_facility'] must be one of #{valid_syslog_facility_level}" unless vars['syslog_facility'].nil? || valid_syslog_facility_level.include?(vars['syslog_facility'])
 
 template '/etc/ssh/sshd_config' do
   source 'etc_ssh_sshd_config.erb'

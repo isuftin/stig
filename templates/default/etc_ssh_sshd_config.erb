@@ -208,6 +208,10 @@ PasswordAuthentication <%= @password_authentication %>
 PermitEmptyPasswords <%= @permit_empty_passwords %>
 <% end -%>
 
+<% if @permit_open && !@permit_open.empty? -%>
+PermitOpen <%= @permit_open.join(" ") %>
+<% end -%>
+
 <% if @permit_root_login -%>
 PermitRootLogin <%= @permit_root_login %>
 <% end -%>

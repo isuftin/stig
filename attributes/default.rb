@@ -405,6 +405,9 @@ default['stig']['network']['zeroconf'] = true
 # Ensure IPv6 is disabled
 default['stig']['network']['disable_ipv6'] = true
 
+# Ignore errors if a sysctl poke fails
+default['sysctl']['ignore_errors'] = false
+
 # Set a hard limit on core dumps
 default['sysctl']['params']['fs.suid_dumpable'] = 0
 
@@ -856,6 +859,18 @@ default['stig']['sshd_config']['permit_root_login'] = 'no'
 
 # Set SSH PermitEmptyPasswords
 default['stig']['sshd_config']['permit_empty_passwords'] = 'no'
+
+# Specifies the destinations	to which TCP port forwarding is	per mitted.  The
+# forwarding specification must	be one of the following forms:
+#
+#   PermitOpen host:port
+#   PermitOpen IPv4_addr:port
+#   PermitOpen [IPv6_addr]:port
+#
+# Multiple forwards may be specified.  An	argument of "any" can be used to remove
+# all restrictions and permit any forwarding requests.	By default all port
+# forwarding requests are permitted.
+default['stig']['sshd_config']['permit_open'] = []
 
 # Specifies whether tun(4) device forwarding is allowed. The argument must be
 # 'yes', 'point-to-point' (layer 3), 'ethernet' (layer 2), or 'no'. Specifying

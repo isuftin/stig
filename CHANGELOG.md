@@ -6,9 +6,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 -- [isuftin@usgs.gov] - auditd cookbook in metadata.rb as a hard dependency
+-- [isuftin@usgs.gov] - PermitOpen keyword in sshd_config
+
+### Removed
+-- [isuftin@usgs.gov] - Third-party sysctl cookbook dependency
 
 ### Changed
+-- [isuftin@usgs.gov] - Now using Chef sysctl resource instead of depending on third
+party cookbook
 -- [isuftin@usgs.gov] - Including auditd cookbook call directly in auditd recipe
+-- [isuftin@usgs.gov] - Allow nulls into sshd attributes to keep keywords out of sshd_config
 -- [isuftin@usgs.gov] - Allowing auditd base config dir to be configurable in attributes
 -- [isuftin@usgs.gov] - Allow not using known sshd attributes to keep them out of sshd
 config file
