@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'stig::login_banner CentOS 7.x' do
-  let(:chef_run) { ChefSpec::SoloRunner.new(platform: 'centos', version: '7.3.1611').converge('stig::login_banner') }
+  let(:chef_run) { ChefSpec::SoloRunner.new(platform: 'centos', version: '7.7.1908').converge('stig::login_banner') }
 
   it 'creates /etc/motd file' do
     expect(chef_run).to create_template('/etc/motd').with(

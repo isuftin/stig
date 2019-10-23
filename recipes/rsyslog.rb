@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Cookbook Name:: stig
 # Recipe:: rsyslog
 # Author: Ivan Suftin <isuftin@usgs.gov>
@@ -9,37 +11,8 @@
 # CENTOS6: 4.1.3
 # UBUNTU: 8.2.3
 
-syslog_rules = []
+node.default['rsyslog']['default_facility_logs'] = node['stig']['logging']['rsyslog_rules_debian'] if %w[debian ubuntu].include?(node['platform'])
 
-node['stig']['logging']['rsyslog_rules'].each do |rule|
-  syslog_rules << rule
-end
+node.default['rsyslog']['default_facility_logs'] = node['stig']['logging']['rsyslog_rules_rhel'] if %w[rhel fedora centos].include?(node['platform'])
 
-if %w[debian ubuntu].include?(node['platform'])
-  node['stig']['logging']['rsyslog_rules_debian'].each do |rule|
-    syslog_rules << rule
-  end
-end
-
-if %w[rhel fedora centos].include?(node['platform'])
-  node['stig']['logging']['rsyslog_rules_rhel'].each do |rule|
-    syslog_rules << rule
-  end
-end
-
-template '/etc/rsyslog.conf' do
-  source 'etc_rsyslog.conf.erb'
-  owner 'root'
-  group 'root'
-  mode 0o644
-  variables(
-    rsyslog_rules: syslog_rules
-  )
-  notifies :run, 'execute[restart_syslog]', :immediately
-end
-
-execute 'restart_syslog' do
-  user 'root'
-  command 'pkill -HUP rsyslogd'
-  action :nothing
-end
+include_recipe 'rsyslog::default'

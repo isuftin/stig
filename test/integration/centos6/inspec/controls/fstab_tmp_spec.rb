@@ -1,31 +1,36 @@
+control 'fstab' do
+  impact 'medium'
+  title 'fstab: Check that fstab mounts are configured'
+  tag 'fstab'
 
-describe command('grep /dev/shm /etc/fstab | grep nodev') do
-  its(:stdout) { should match /nodev/ }
-end
-describe command('mount | grep /dev/shm | grep nodev') do
-  its(:stdout) { should match /nodev/ }
-end
+  describe command('grep /dev/shm /etc/fstab | grep nodev') do
+    its(:stdout) { should match /nodev/ }
+  end
+  describe command('mount | grep /dev/shm | grep nodev') do
+    its(:stdout) { should match /nodev/ }
+  end
 
-describe command('grep /dev/shm /etc/fstab | grep nosuid') do
-  its(:stdout) { should match /nosuid/ }
-end
-describe command('mount | grep /dev/shm | grep nosuid') do
-  its(:stdout) { should match /nosuid/ }
-end
+  describe command('grep /dev/shm /etc/fstab | grep nosuid') do
+    its(:stdout) { should match /nosuid/ }
+  end
+  describe command('mount | grep /dev/shm | grep nosuid') do
+    its(:stdout) { should match /nosuid/ }
+  end
 
-describe command('grep /dev/shm /etc/fstab | grep noexec') do
-  its(:stdout) { should match /noexec/ }
-end
-describe command('mount | grep /dev/shm | grep noexec') do
-  its(:stdout) { should match /noexec/ }
-end
+  describe command('grep /dev/shm /etc/fstab | grep noexec') do
+    its(:stdout) { should match /noexec/ }
+  end
+  describe command('mount | grep /dev/shm | grep noexec') do
+    its(:stdout) { should match /noexec/ }
+  end
 
-describe file('/dev/shm') do
-  it { should be_mounted }
-end
+  describe file('/dev/shm') do
+    it { should be_mounted }
+  end
 
-describe command('mount | grep /var/tmp') do
-  its(:stdout) { should include('/var/tmp') }
+  describe command('mount | grep /var/tmp') do
+    its(:stdout) { should include('/var/tmp') }
+  end
 end
 
 # TODO: Deal with failing test

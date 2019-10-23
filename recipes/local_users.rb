@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Cookbook Name:: stig
 # Recipe:: local_users
 # Author: Craig Poma <cpoma@mitre.org>

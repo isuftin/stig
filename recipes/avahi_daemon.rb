@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Cookbook Name:: stig
 # Recipe:: avahi_daemon
 # Author: Ivan Suftin <isuftin@usgs.gov>

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Cookbook Name:: stig
 # Recipe:: login_banner
 # Author: Ivan Suftin <isuftin@usgs.gov>

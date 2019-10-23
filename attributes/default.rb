@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Use an MD5 hash for CentOS. Ex: openssl passwd -1 ChangeMe returns:
 # $1$ifTCDC.V$0VpmYkffVbzFkE8ElJrWU/
 #
@@ -300,6 +302,7 @@ default['stig']['aide']['paths_rhel']['default'] = {
 }
 
 # See http://man7.org/linux/man-pages/man5/auditd.conf.5.html
+default['stig']['auditd']['config_dir'] = '/etc/audit'
 default['stig']['auditd']['log_file'] = '/var/log/audit/audit.log'
 default['stig']['auditd']['log_format'] = 'RAW'
 default['stig']['auditd']['log_group'] = 'root'
@@ -404,6 +407,9 @@ default['stig']['network']['zeroconf'] = true
 # Ensure IPv6 is disabled
 default['stig']['network']['disable_ipv6'] = true
 
+# Ignore errors if a sysctl poke fails
+default['sysctl']['ignore_errors'] = false
+
 # Set a hard limit on core dumps
 default['sysctl']['params']['fs.suid_dumpable'] = 0
 
@@ -495,48 +501,48 @@ default['stig']['network']['ipv6'] = 'no'
 # Configure /etc/rsyslog.conf
 # Include rules for logging in array with space separating rule with log location
 default['stig']['logging']['rsyslog_rules'] = []
-default['stig']['logging']['rsyslog_rules_rhel'] = [
-  '*.info;mail.none;authpriv.none;cron.none   /var/log/messages',
-  'authpriv.*   /var/log/secure',
-  'mail.*   -/var/log/maillog',
-  'cron.*   /var/log/cron',
-  '*.emerg   *',
-  'uucp,news.crit   /var/log/spooler',
-  'local7.*    /var/log/boot.log',
-  '$FileCreateMode 0640',
-  '*.emerg :omusrmsg:*',
-  'mail.* -/var/log/mail',
-  'mail.info -/var/log/mail.info',
-  'mail.warning -/var/log/mail.warn',
-  'mail.err /var/log/mail.err',
-  'news.crit -/var/log/news/news.crit',
-  'news.err -/var/log/news/news.err',
-  'news.notice -/var/log/news/news.notice',
-  '*.=warning;*.=err -/var/log/warn',
-  '*.crit /var/log/warn',
-  '*.*;mail.none;news.none -/var/log/messages',
-  'local0,local1.* -/var/log/localmessages',
-  'local2,local3.* -/var/log/localmessages',
-  'local4,local5.* -/var/log/localmessages',
-  'local6,local7.* -/var/log/localmessages'
-]
-default['stig']['logging']['rsyslog_rules_debian'] = [
-  '*.emerg :omusrmsg:*',
-  'mail.* -/var/log/mail',
-  'mail.info -/var/log/mail.info',
-  'mail.warning -/var/log/mail.warn',
-  'mail.err /var/log/mail.err',
-  'news.crit -/var/log/news/news.crit',
-  'news.err -/var/log/news/news.err',
-  'news.notice -/var/log/news/news.notice',
-  '*.=warning;*.=err -/var/log/warn',
-  '*.crit /var/log/warn',
-  '*.*;mail.none;news.none -/var/log/messages',
-  'local0,local1.* -/var/log/localmessages',
-  'local2,local3.* -/var/log/localmessages',
-  'local4,local5.* -/var/log/localmessages',
-  'local6,local7.* -/var/log/localmessages'
-]
+default['stig']['logging']['rsyslog_rules_rhel'] = {
+  '*.info;mail.none;authpriv.none;cron.none' => '/var/log/messages',
+  'authpriv.*' => '/var/log/secure',
+  'cron.*' => '/var/log/cron',
+  'uucp,news.crit' => '/var/log/spooler',
+  'local7.*' => '/var/log/boot.log',
+  '*.emerg' => ':omusrmsg:*',
+  'mail.*' => '-/var/log/mail',
+  'mail.info' => '-/var/log/mail.info',
+  'mail.warning' => '-/var/log/mail.warn',
+  'mail.err' => '/var/log/mail.err',
+  'news.crit' => '-/var/log/news/news.crit',
+  'news.err' => '-/var/log/news/news.err',
+  'news.notice' => '-/var/log/news/news.notice',
+  '*.=warning;*.=err' => '-/var/log/warn',
+  '*.crit' => '/var/log/warn',
+  '*.*;mail.none;news.none' => '-/var/log/messages',
+  'local0,local1.*' => '-/var/log/localmessages',
+  'local2,local3.*' => '-/var/log/localmessages',
+  'local4,local5.*' => '-/var/log/localmessages',
+  'local6,local7.*' => '-/var/log/localmessages'
+}
+default['stig']['logging']['rsyslog_rules_debian'] = {
+  '*.emerg' => ':omusrmsg:*',
+  'mail.*' => '-/var/log/mail',
+  'mail.info' => '-/var/log/mail.info',
+  'mail.warning' => '-/var/log/mail.warn',
+  'mail.err' => '/var/log/mail.err',
+  'news.crit' => '-/var/log/news/news.crit',
+  'news.err' => '-/var/log/news/news.err',
+  'news.notice' => '-/var/log/news/news.notice',
+  '*.=warning;*.=err' => '-/var/log/warn',
+  '*.crit' => '/var/log/warn',
+  '*.*;mail.none;news.none' => '-/var/log/messages',
+  'local0,local1.*' => '-/var/log/localmessages',
+  'local2,local3.*' => '-/var/log/localmessages',
+  'local4,local5.*' => '-/var/log/localmessages',
+  'local6,local7.*' => '-/var/log/localmessages'
+}
+default['rsyslog']['file_create_mode'] = '0640'
+default['rsyslog']['user'] = 'root'
+default['rsyslog']['group'] = 'root'
 
 # Configure logrotate
 default['logrotate']['global']['/var/log/cron'] = {
@@ -582,6 +588,10 @@ default['stig']['selinux']['enabled'] = true
 default['stig']['selinux']['status'] = 'enforcing'
 # Possible values: targeted, mls
 default['stig']['selinux']['type'] = 'targeted'
+
+# SSHD Configuration
+# Comment out any of these elements to keep them out of sshd config file. Some
+# of these may be deprecated in your version of sshd
 
 # Specifies whether TCP forwarding is permitted. Allowed values:
 # 'yes', 'all', 'no', 'local', 'remote'
@@ -851,6 +861,18 @@ default['stig']['sshd_config']['permit_root_login'] = 'no'
 
 # Set SSH PermitEmptyPasswords
 default['stig']['sshd_config']['permit_empty_passwords'] = 'no'
+
+# Specifies the destinations to which TCP port forwarding is permitted. The
+# forwarding specification must be one of the following forms:
+#
+#   PermitOpen host:port
+#   PermitOpen IPv4_addr:port
+#   PermitOpen [IPv6_addr]:port
+#
+# Multiple forwards may be specified.  An argument of "any" can be used to remove
+# all restrictions and permit any forwarding requests. By default all port
+# forwarding requests are permitted.
+default['stig']['sshd_config']['permit_open'] = []
 
 # Specifies whether tun(4) device forwarding is allowed. The argument must be
 # 'yes', 'point-to-point' (layer 3), 'ethernet' (layer 2), or 'no'. Specifying

@@ -1,11 +1,16 @@
-# CENTOS6: 3.5
+control 'dhcp' do
+  impact 'high'
+  title 'dhcp: Ensure DHCP server not running'
+  tag 'dhcp'
+  # CENTOS6: 3.5
 
-describe package('dhcp') do
-  it { should_not be_installed }
-end
+  describe package('dhcp') do
+    it { should_not be_installed }
+  end
 
-describe service('dhcpd') do
-  it { should_not be_installed }
-  it { should_not be_enabled }
-  it { should_not be_running }
+  describe service('dhcpd') do
+    it { should_not be_installed }
+    it { should_not be_enabled }
+    it { should_not be_running }
+  end
 end

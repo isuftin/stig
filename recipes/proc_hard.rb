@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Cookbook Name:: stig
 # Recipe:: proc_hard
 # Author: David Blodgett <dblodgett@usgs.gov>, Ivan Suftin <isuftin@usgs.gov>
@@ -23,9 +25,10 @@ package 'whoopsie' do
 end
 
 node['sysctl']['params'].each do |param, value|
-  sysctl_param param do
+  sysctl param do
     key param
     value value
+    ignore_error node['sysctl']['ignore_errors']
     only_if "sysctl -n #{param}"
   end
 end

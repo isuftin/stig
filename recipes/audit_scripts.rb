@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Cookbook Name:: stig
 # Recipe:: audit_scripts
 # Author: Ivan Suftin <isuftin@usgs.gov>

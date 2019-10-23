@@ -4,6 +4,31 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 
+### Added
+-- [isuftin@usgs.gov] - auditd cookbook in metadata.rb as a hard dependency
+-- [isuftin@usgs.gov] - PermitOpen keyword in sshd_config
+
+### Removed
+-- [isuftin@usgs.gov] - Third-party sysctl cookbook dependency
+
+### Changed
+-- [isuftin@usgs.gov] - Now using Chef sysctl resource instead of depending on third
+party cookbook. *BREAKING CHANGE* - Now requires Chef 14+
+-- [isuftin@usgs.gov] - Switch to using rsyslog third party cookbook. *BREAKING CHANGE*
+This also changes the format of attributes for `default['stig']['logging']['rsyslog_rules_rhel']`
+and `default['stig']['logging']['rsyslog_rules_debian']` from an array to a hash
+-- [isuftin@usgs.gov] - Including auditd cookbook call directly in auditd recipe
+-- [isuftin@usgs.gov] - Allow nulls into sshd attributes to keep keywords out of sshd_config
+-- [isuftin@usgs.gov] - Allowing auditd base config dir to be configurable in attributes
+-- [isuftin@usgs.gov] - Allow not using known sshd attributes to keep them out of sshd
+config file
+
+### Fixed
+-- [isuftin@usgs.gov] - auditd service reloading. A temp fix until https://github.com/chef-cookbooks/auditd/issues/55
+is dealt with
+-- [isuftin@usgs.gov] - inspec and unit tests
+
+
 ## [0.6.16] - 2019-04-22
 
 ### Changed

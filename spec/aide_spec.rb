@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'stig::aide CentOS 7.x' do
-  let(:chef_run) { ChefSpec::SoloRunner.new(platform: 'centos', version: '7.3.1611').converge('stig::aide') }
+  let(:chef_run) { ChefSpec::SoloRunner.new(platform: 'centos', version: '7.7.1908').converge('stig::aide') }
 
   before do
     stub_command('crontab -u root -l | grep aide').and_return(false)

@@ -2,12 +2,11 @@ require 'spec_helper'
 
 describe 'stig::boot_settings CentOS 7.x' do
 
-  # let(:chef_run) do
-  #   ChefSpec::SoloRunner.new do |node|
-  #     node.normal['stig']['grub']['hashedpassword'] = 'hello'
-  #   end.converge(described_recipe)
-  # end
-  let(:chef_run) { ChefSpec::SoloRunner.new(platform: 'centos', version: '7.3.1611').converge('stig::boot_settings') }
+  let(:chef_run) do
+    ChefSpec::SoloRunner.new(platform: 'centos', version: '7.7.1908') do |node|
+      node.normal['stig']['grub']['hashedpassword'] = 'hello'
+    end.converge('stig::boot_settings')
+  end
 
   grub_file = "/boot/grub2/grub.cfg"
 
@@ -104,12 +103,11 @@ end
 
 describe 'stig::boot_settings CentOS 6.x' do
 
-  # let(:chef_run) do
-  #   ChefSpec::SoloRunner.new do |node|
-  #     node.normal['stig']['grub']['hashedpassword'] = 'hello'
-  #   end.converge(described_recipe)
-  # end
-  let(:chef_run) { ChefSpec::SoloRunner.new(platform: 'centos', version: '6.9').converge('stig::boot_settings') }
+  let(:chef_run) do
+    ChefSpec::SoloRunner.new(platform: 'centos', version: '6.9') do |node|
+      node.normal['stig']['grub']['hashedpassword'] = 'hello'
+    end.converge('stig::boot_settings')
+  end
   grub_file = "/boot/grub/grub.conf"
 
   before do
@@ -170,7 +168,7 @@ describe 'stig::boot_settings CentOS 6.x' do
   end
 
   it 'Executes Add password to grub' do
-    expect(chef_run).to run_execute("sed -i '/password/d' #{grub_file}")
+    expect(chef_run).to_not run_execute("sed -i '/password/d' #{grub_file}")
   end
 
   it 'creates a cookbook_file /etc/inittab' do

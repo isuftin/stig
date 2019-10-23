@@ -21,30 +21,7 @@ suites:
           - name: centos7
             path: test/integration/centos7/inspec
     run_list:
-      - recipe[auditd]
-      - recipe[stig::auditd]
-      - recipe[stig::auditd_rules]
-      - recipe[stig::fstab_tmp]
-      - recipe[stig::tcp_wrappers]
-      - recipe[stig::boot_settings]
-      - recipe[stig::proc_hard]
-      - recipe[stig::cis]
-      - recipe[stig::avahi_daemon]
-      - recipe[stig::ipv6]
-      - recipe[stig::dhcp]
-      - recipe[stig::mail_transfer_agent]
-      - recipe[stig::hosts]
-      - recipe[stig::rsyslog]
-      - recipe[logrotate::global]
-      - recipe[stig::sshd_config]
-      - recipe[stig::system_auth]
-      - recipe[stig::login_defs]
-      - recipe[stig::login_banner]
-      - recipe[stig::file_permissions]
-      - recipe[stig::audits]
-      - recipe[stig::audit_scripts]
-      - recipe[stig::su_restriction]
-      - recipe[stig::aide]
+      - recipe[stig]
     attributes: {
       "auditd" : {
         "ruleset" : "stig"
@@ -59,30 +36,7 @@ suites:
           - name: centos6
             path: test/integration/centos6/inspec
     run_list:
-      - recipe[auditd]
-      - recipe[stig::auditd]
-      - recipe[stig::auditd_rules]
-      - recipe[stig::fstab_tmp]
-      - recipe[stig::tcp_wrappers]
-      - recipe[stig::boot_settings]
-      - recipe[stig::proc_hard]
-      - recipe[stig::cis]
-      - recipe[stig::avahi_daemon]
-      - recipe[stig::ipv6]
-      - recipe[stig::dhcp]
-      - recipe[stig::mail_transfer_agent]
-      - recipe[stig::hosts]
-      - recipe[stig::rsyslog]
-      - recipe[logrotate::global]
-      - recipe[stig::sshd_config]
-      - recipe[stig::system_auth]
-      - recipe[stig::login_defs]
-      - recipe[stig::login_banner]
-      - recipe[stig::file_permissions]
-      - recipe[stig::audits]
-      - recipe[stig::audit_scripts]
-      - recipe[stig::su_restriction]
-      - recipe[stig::aide]
+      - recipe[stig]
     attributes: {
       "auditd" : {
         "ruleset" : "stig"
