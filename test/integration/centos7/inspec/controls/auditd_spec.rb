@@ -3,7 +3,6 @@ control 'auditd-config' do
   title 'AuditD: Check config file'
   tag 'audit'
 
-
   only_if do
     package('audit').installed?
   end

@@ -83,7 +83,6 @@ end
   client_alive_count_max
 ].each do |i|
   raise "node['stig']['sshd_config']['#{i}'] must be an integer" unless vars[i].nil? || vars[i].is_a?(Integer)
-
 end
 
 valid_address_family = %w[any inet inet6]

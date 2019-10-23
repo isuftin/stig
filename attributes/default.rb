@@ -499,48 +499,48 @@ default['stig']['network']['ipv6'] = 'no'
 # Configure /etc/rsyslog.conf
 # Include rules for logging in array with space separating rule with log location
 default['stig']['logging']['rsyslog_rules'] = []
-default['stig']['logging']['rsyslog_rules_rhel'] = [
-  '*.info;mail.none;authpriv.none;cron.none   /var/log/messages',
-  'authpriv.*   /var/log/secure',
-  'mail.*   -/var/log/maillog',
-  'cron.*   /var/log/cron',
-  '*.emerg   *',
-  'uucp,news.crit   /var/log/spooler',
-  'local7.*    /var/log/boot.log',
-  '$FileCreateMode 0640',
-  '*.emerg :omusrmsg:*',
-  'mail.* -/var/log/mail',
-  'mail.info -/var/log/mail.info',
-  'mail.warning -/var/log/mail.warn',
-  'mail.err /var/log/mail.err',
-  'news.crit -/var/log/news/news.crit',
-  'news.err -/var/log/news/news.err',
-  'news.notice -/var/log/news/news.notice',
-  '*.=warning;*.=err -/var/log/warn',
-  '*.crit /var/log/warn',
-  '*.*;mail.none;news.none -/var/log/messages',
-  'local0,local1.* -/var/log/localmessages',
-  'local2,local3.* -/var/log/localmessages',
-  'local4,local5.* -/var/log/localmessages',
-  'local6,local7.* -/var/log/localmessages'
-]
-default['stig']['logging']['rsyslog_rules_debian'] = [
-  '*.emerg :omusrmsg:*',
-  'mail.* -/var/log/mail',
-  'mail.info -/var/log/mail.info',
-  'mail.warning -/var/log/mail.warn',
-  'mail.err /var/log/mail.err',
-  'news.crit -/var/log/news/news.crit',
-  'news.err -/var/log/news/news.err',
-  'news.notice -/var/log/news/news.notice',
-  '*.=warning;*.=err -/var/log/warn',
-  '*.crit /var/log/warn',
-  '*.*;mail.none;news.none -/var/log/messages',
-  'local0,local1.* -/var/log/localmessages',
-  'local2,local3.* -/var/log/localmessages',
-  'local4,local5.* -/var/log/localmessages',
-  'local6,local7.* -/var/log/localmessages'
-]
+default['stig']['logging']['rsyslog_rules_rhel'] = {
+  '*.info;mail.none;authpriv.none;cron.none' => '/var/log/messages',
+  'authpriv.*' => '/var/log/secure',
+  'mail.*' => '-/var/log/maillog',
+  'cron.*' => '/var/log/cron',
+  '*.emerg' => '*',
+  'uucp,news.crit' => '/var/log/spooler',
+  'local7.*' => '/var/log/boot.log',
+  '*.emerg' => ':omusrmsg:*',
+  'mail.*' => '-/var/log/mail',
+  'mail.info' => '-/var/log/mail.info',
+  'mail.warning' => '-/var/log/mail.warn',
+  'mail.err' => '/var/log/mail.err',
+  'news.crit' => '-/var/log/news/news.crit',
+  'news.err' => '-/var/log/news/news.err',
+  'news.notice' => '-/var/log/news/news.notice',
+  '*.=warning;*.=err' => '-/var/log/warn',
+  '*.crit' => '/var/log/warn',
+  '*.*;mail.none;news.none' => '-/var/log/messages',
+  'local0,local1.*' => '-/var/log/localmessages',
+  'local2,local3.*' => '-/var/log/localmessages',
+  'local4,local5.*' => '-/var/log/localmessages',
+  'local6,local7.*' => '-/var/log/localmessages'
+}
+default['stig']['logging']['rsyslog_rules_debian'] = {
+  '*.emerg' => ':omusrmsg:*',
+  'mail.*' => '-/var/log/mail',
+  'mail.info' => '-/var/log/mail.info',
+  'mail.warning' => '-/var/log/mail.warn',
+  'mail.err' => '/var/log/mail.err',
+  'news.crit' => '-/var/log/news/news.crit',
+  'news.err' => '-/var/log/news/news.err',
+  'news.notice' => '-/var/log/news/news.notice',
+  '*.=warning;*.=err' => '-/var/log/warn',
+  '*.crit' => '/var/log/warn',
+  '*.*;mail.none;news.none' => '-/var/log/messages',
+  'local0,local1.*' => '-/var/log/localmessages',
+  'local2,local3.*' => '-/var/log/localmessages',
+  'local4,local5.*' => '-/var/log/localmessages',
+  'local6,local7.*' => '-/var/log/localmessages'
+}
+default['rsyslog']['file_create_mode'] = '640'
 
 # Configure logrotate
 default['logrotate']['global']['/var/log/cron'] = {
@@ -860,15 +860,15 @@ default['stig']['sshd_config']['permit_root_login'] = 'no'
 # Set SSH PermitEmptyPasswords
 default['stig']['sshd_config']['permit_empty_passwords'] = 'no'
 
-# Specifies the destinations	to which TCP port forwarding is	per mitted.  The
-# forwarding specification must	be one of the following forms:
+# Specifies the destinations to which TCP port forwarding is permitted. The
+# forwarding specification must be one of the following forms:
 #
 #   PermitOpen host:port
 #   PermitOpen IPv4_addr:port
 #   PermitOpen [IPv6_addr]:port
 #
-# Multiple forwards may be specified.  An	argument of "any" can be used to remove
-# all restrictions and permit any forwarding requests.	By default all port
+# Multiple forwards may be specified.  An argument of "any" can be used to remove
+# all restrictions and permit any forwarding requests. By default all port
 # forwarding requests are permitted.
 default['stig']['sshd_config']['permit_open'] = []
 

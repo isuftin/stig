@@ -12,6 +12,8 @@
 
 # BEGIN
 # Remove this block wnen this gets resolved: https://github.com/chef-cookbooks/auditd/issues/55
+
+# rubocop:disable Style/MixinUsage
 extend AuditD::Helper
 
 package auditd_package_name_for(node['platform_family'])
@@ -25,7 +27,7 @@ service 'auditd' do
     reload_command '/usr/sbin/service auditd reload'
     restart_command '/usr/sbin/service auditd restart'
   end
-  supports [:start, :stop, :restart, :reload, :status]
+  supports %i[start stop restart reload status]
   action :enable
 end
 # END

@@ -13,7 +13,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 -- [isuftin@usgs.gov] - Now using Chef sysctl resource instead of depending on third
-party cookbook
+party cookbook. *BREAKING CHANGE* - Now requires Chef 14+
+-- [isuftin@usgs.gov] - Switch to using rsyslog third party cookbook. *BREAKING CHANGE*
+This also changes the format of attributes for `default['stig']['logging']['rsyslog_rules_rhel']`
+and `default['stig']['logging']['rsyslog_rules_debian']` from an array to a hash
 -- [isuftin@usgs.gov] - Including auditd cookbook call directly in auditd recipe
 -- [isuftin@usgs.gov] - Allow nulls into sshd attributes to keep keywords out of sshd_config
 -- [isuftin@usgs.gov] - Allowing auditd base config dir to be configurable in attributes

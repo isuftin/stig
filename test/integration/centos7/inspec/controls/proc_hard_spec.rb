@@ -1,9 +1,7 @@
-
-
 control 'proc-hard' do
   impact 'medium'
   title 'proc_hard: Set sysctl settings and ensure packages are installed'
-  tag 'aide'
+  tag 'proc-hard'
   # CENTOS/RHEL 6/7 (2.0.0) 1.5.1
   describe file('/etc/security/limits.conf') do
     it { should exist }
