@@ -9,12 +9,8 @@
 # CENTOS6: 4.1.3
 # UBUNTU: 8.2.3
 
-if %w[debian ubuntu].include?(node['platform'])
-  node.default['rsyslog']['default_facility_logs'] = node['stig']['logging']['rsyslog_rules_debian']
-end
+node.default['rsyslog']['default_facility_logs'] = node['stig']['logging']['rsyslog_rules_debian'] if %w[debian ubuntu].include?(node['platform'])
 
-if %w[rhel fedora centos].include?(node['platform'])
-  node.default['rsyslog']['default_facility_logs'] = node['stig']['logging']['rsyslog_rules_rhel']
-end
+node.default['rsyslog']['default_facility_logs'] = node['stig']['logging']['rsyslog_rules_rhel'] if %w[rhel fedora centos].include?(node['platform'])
 
 include_recipe 'rsyslog'

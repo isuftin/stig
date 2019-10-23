@@ -1,7 +1,7 @@
 control 'rsyslog' do
   impact 'medium'
   title 'rsyslog: ensure syslog configuration is set properly'
-  tag 'proc-hard'
+  tag 'rsyslog'
 
   # CENTOS6: 4.1.3
   # UBUNTU: 8.2.3

@@ -15,7 +15,7 @@
 
 # rubocop:disable Style/MixinUsage
 extend AuditD::Helper
-
+# rubocop:enable Style/MixinUsage
 package auditd_package_name_for(node['platform_family'])
 
 service 'auditd' do

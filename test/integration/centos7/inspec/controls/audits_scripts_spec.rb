@@ -1,4 +1,4 @@
-control 'audits-scripts' do
+control 'audit-scripts' do
   impact 'medium'
   title 'auditing scripts: Check to make sure scripts were placed properly'
   tag 'audits'
