@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Use an MD5 hash for CentOS. Ex: openssl passwd -1 ChangeMe returns:
 # $1$ifTCDC.V$0VpmYkffVbzFkE8ElJrWU/
 #

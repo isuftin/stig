@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Cookbook Name:: stig
 # Recipe:: proc_hard
 # Author: David Blodgett <dblodgett@usgs.gov>, Ivan Suftin <isuftin@usgs.gov>
