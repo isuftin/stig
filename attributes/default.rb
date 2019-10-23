@@ -538,7 +538,9 @@ default['stig']['logging']['rsyslog_rules_debian'] = {
   'local4,local5.*' => '-/var/log/localmessages',
   'local6,local7.*' => '-/var/log/localmessages'
 }
-default['rsyslog']['file_create_mode'] = '640'
+default['rsyslog']['file_create_mode'] = '0640'
+default['rsyslog']['user'] = 'root'
+default['rsyslog']['group'] = 'root'
 
 # Configure logrotate
 default['logrotate']['global']['/var/log/cron'] = {
