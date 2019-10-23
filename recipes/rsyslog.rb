@@ -15,4 +15,4 @@ node.default['rsyslog']['default_facility_logs'] = node['stig']['logging']['rsys
 
 node.default['rsyslog']['default_facility_logs'] = node['stig']['logging']['rsyslog_rules_rhel'] if %w[rhel fedora centos].include?(node['platform'])
 
-include_recipe 'rsyslog'
+include_recipe 'rsyslog::default'

@@ -99,7 +99,7 @@ raise "node['stig']['sshd_config']['gateway_ports'] must be one of #{valid_gatew
 valid_compression = %w[yes no delayed]
 raise "node['stig']['sshd_config']['compression'] must be one of #{valid_compression}" unless vars['compression'].nil? || valid_compression.include?(vars['compression'])
 
-valid_log_level = %w[QUIET FATAL ERROR INFO	VERBOSE DEBUG DEBUG1 DEBUG2 DEBUG3]
+valid_log_level = %w[QUIET FATAL ERROR INFO VERBOSE DEBUG DEBUG1 DEBUG2 DEBUG3]
 raise "node['stig']['sshd_config']['log_level'] must be one of #{valid_log_level}" unless vars['log_level'].nil? || valid_log_level.include?(vars['log_level'])
 
 valid_permit_tunnel = %w[yes no ethernet point-to-point]

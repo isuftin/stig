@@ -15,10 +15,13 @@
 # BEGIN
 # Remove this block wnen this gets resolved: https://github.com/chef-cookbooks/auditd/issues/55
 
-# rubocop:disable Style/MixinUsage
-extend AuditD::Helper
-# rubocop:enable Style/MixinUsage
-package auditd_package_name_for(node['platform_family'])
+case node['platform_family']
+when 'rhel', 'fedora', 'amazon'
+  package_name = 'audit'
+else
+  package_name = 'auditd'
+end
+package package_name
 
 service 'auditd' do
   if platform_family?('rhel') && node['init_package'] == 'systemd' && node['platform_version'] < '7.5'
