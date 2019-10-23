@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'stig::avahi_daemon CentOS 7.x' do
-  let(:chef_run) { ChefSpec::SoloRunner.new(platform: 'centos', version: '7.3.1611').converge('stig::avahi_daemon') }
+  let(:chef_run) { ChefSpec::SoloRunner.new(platform: 'centos', version: '7.7.1908').converge('stig::avahi_daemon') }
 
 
   before do
