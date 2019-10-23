@@ -6,9 +6,10 @@ env:
     - machine_pass=travis
     - machine_port=22
     - KITCHEN_YAML=.kitchen.travis.yml
+    - CHEF_VERSION=12.22.5
 
 rvm:
-  - 2.3.1
+  - 2.6.0
 
 sudo: required
 dist: trusty
