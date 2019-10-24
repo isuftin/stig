@@ -13,7 +13,6 @@ control 'rsyslog' do
     it { should be_owned_by 'root' }
     it { should be_grouped_into 'root' }
     its('mode') { should cmp '0644' }
-    its('content') { should include('$FileCreateMode 0640') }
   end
 
   describe file('/etc/rsyslog.d/50-default.conf') do

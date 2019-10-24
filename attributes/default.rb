@@ -500,46 +500,50 @@ default['stig']['network']['ipv6'] = 'no'
 
 # Configure /etc/rsyslog.conf
 # Include rules for logging in array with space separating rule with log location
-default['stig']['logging']['rsyslog_rules'] = []
-default['stig']['logging']['rsyslog_rules_rhel'] = {
-  '*.info;mail.none;authpriv.none;cron.none' => '/var/log/messages',
-  'authpriv.*' => '/var/log/secure',
-  'cron.*' => '/var/log/cron',
-  'uucp,news.crit' => '/var/log/spooler',
-  'local7.*' => '/var/log/boot.log',
-  '*.emerg' => ':omusrmsg:*',
-  'mail.*' => '-/var/log/mail',
-  'mail.info' => '-/var/log/mail.info',
-  'mail.warning' => '-/var/log/mail.warn',
-  'mail.err' => '/var/log/mail.err',
-  'news.crit' => '-/var/log/news/news.crit',
-  'news.err' => '-/var/log/news/news.err',
-  'news.notice' => '-/var/log/news/news.notice',
-  '*.=warning;*.=err' => '-/var/log/warn',
-  '*.crit' => '/var/log/warn',
-  '*.*;mail.none;news.none' => '-/var/log/messages',
-  'local0,local1.*' => '-/var/log/localmessages',
-  'local2,local3.*' => '-/var/log/localmessages',
-  'local4,local5.*' => '-/var/log/localmessages',
-  'local6,local7.*' => '-/var/log/localmessages'
-}
-default['stig']['logging']['rsyslog_rules_debian'] = {
-  '*.emerg' => ':omusrmsg:*',
-  'mail.*' => '-/var/log/mail',
-  'mail.info' => '-/var/log/mail.info',
-  'mail.warning' => '-/var/log/mail.warn',
-  'mail.err' => '/var/log/mail.err',
-  'news.crit' => '-/var/log/news/news.crit',
-  'news.err' => '-/var/log/news/news.err',
-  'news.notice' => '-/var/log/news/news.notice',
-  '*.=warning;*.=err' => '-/var/log/warn',
-  '*.crit' => '/var/log/warn',
-  '*.*;mail.none;news.none' => '-/var/log/messages',
-  'local0,local1.*' => '-/var/log/localmessages',
-  'local2,local3.*' => '-/var/log/localmessages',
-  'local4,local5.*' => '-/var/log/localmessages',
-  'local6,local7.*' => '-/var/log/localmessages'
-}
+# See: https://github.com/chef-cookbooks/rsyslog/blob/v6.0.7/attributes/default.rb#L94
+case node['platform']
+when 'rhel', 'fedora', 'centos'
+  default['rsyslog']['default_facility_logs'] = {
+    '*.info;mail.none;authpriv.none;cron.none' => '/var/log/messages',
+    'authpriv.*' => '/var/log/secure',
+    'cron.*' => '/var/log/cron',
+    'uucp,news.crit' => '/var/log/spooler',
+    'local7.*' => '/var/log/boot.log',
+    '*.emerg' => ':omusrmsg:*',
+    'mail.*' => '-/var/log/mail',
+    'mail.info' => '-/var/log/mail.info',
+    'mail.warning' => '-/var/log/mail.warn',
+    'mail.err' => '/var/log/mail.err',
+    'news.crit' => '-/var/log/news/news.crit',
+    'news.err' => '-/var/log/news/news.err',
+    'news.notice' => '-/var/log/news/news.notice',
+    '*.=warning;*.=err' => '-/var/log/warn',
+    '*.crit' => '/var/log/warn',
+    '*.*;mail.none;news.none' => '-/var/log/messages',
+    'local0,local1.*' => '-/var/log/localmessages',
+    'local2,local3.*' => '-/var/log/localmessages',
+    'local4,local5.*' => '-/var/log/localmessages',
+    'local6,local7.*' => '-/var/log/localmessages'
+  }
+when 'debian', 'ubuntu'
+  default['rsyslog']['default_facility_logs'] = {
+    '*.emerg' => ':omusrmsg:*',
+    'mail.*' => '-/var/log/mail',
+    'mail.info' => '-/var/log/mail.info',
+    'mail.warning' => '-/var/log/mail.warn',
+    'mail.err' => '/var/log/mail.err',
+    'news.crit' => '-/var/log/news/news.crit',
+    'news.err' => '-/var/log/news/news.err',
+    'news.notice' => '-/var/log/news/news.notice',
+    '*.=warning;*.=err' => '-/var/log/warn',
+    '*.crit' => '/var/log/warn',
+    '*.*;mail.none;news.none' => '-/var/log/messages',
+    'local0,local1.*' => '-/var/log/localmessages',
+    'local2,local3.*' => '-/var/log/localmessages',
+    'local4,local5.*' => '-/var/log/localmessages',
+    'local6,local7.*' => '-/var/log/localmessages'
+  }
+end
 default['rsyslog']['file_create_mode'] = '0640'
 default['rsyslog']['user'] = 'root'
 default['rsyslog']['group'] = 'root'
