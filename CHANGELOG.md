@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 -- [isuftin@usgs.gov] - auditd cookbook in metadata.rb as a hard dependency
 -- [isuftin@usgs.gov] - PermitOpen keyword in sshd_config
+-- [isuftin@usgs.gov] - Ability to ignore errors on sysctl updates
 
 ### Removed
 -- [isuftin@usgs.gov] - Third-party sysctl cookbook dependency
@@ -15,11 +16,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 -- [isuftin@usgs.gov] - Now using Chef sysctl resource instead of depending on third
 party cookbook. *BREAKING CHANGE* - Now requires Chef 14+
 -- [isuftin@usgs.gov] - Switch to using rsyslog third party cookbook. *BREAKING CHANGE*
-This also changes the format of attributes for `default['stig']['logging']['rsyslog_rules_rhel']`
-and `default['stig']['logging']['rsyslog_rules_debian']` from an array to a hash
+The attributes for rsyslog rules should now be `default['rsyslog']['default_facility_logs']`
+in the fornmat specified @ https://github.com/chef-cookbooks/rsyslog/blob/v6.0.7/attributes/default.rb#L94
+This now becomes a wrapper cookbook for the third party rsyslog cookbook
 -- [isuftin@usgs.gov] - Including auditd cookbook call directly in auditd recipe
 -- [isuftin@usgs.gov] - Allow nulls into sshd attributes to keep keywords out of sshd_config
 -- [isuftin@usgs.gov] - Allowing auditd base config dir to be configurable in attributes
+-- [isuftin@usgs.gov] - Version of CentOS 7 in ChefSpec tests
 -- [isuftin@usgs.gov] - Allow not using known sshd attributes to keep them out of sshd
 config file
 
@@ -28,6 +31,8 @@ config file
 is dealt with
 -- [isuftin@usgs.gov] - inspec and unit tests
 
+
+## [1.0.0] - 2019-10-25
 
 ## [0.6.16] - 2019-04-22
 
