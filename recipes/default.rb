@@ -7,6 +7,7 @@
 # Copyright (c) 2014 The Authors, All Rights Reserved.
 
 include_recipe 'stig::auditd'
+
 include_recipe 'stig::auditd_rules'
 
 # RHEL6: 1.1.2, 1.1.3, 1.1.4, 1.1.6, 1.14, 1.1.15, 1.1.16
