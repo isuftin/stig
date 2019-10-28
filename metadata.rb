@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-name             'stig' # ~FC121
+name             'stig-test' # ~FC121
 maintainer       'USGS WMA EB'
 maintainer_email 'isuftin@usgs.gov'
 license          'CPL-1.0'

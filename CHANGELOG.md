@@ -4,6 +4,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 
+-- [isuftin@usgs.gov] - Removed a seconday run of logrotate::global in the default
+recipe
+
 ## [1.0.0] - 2019-10-25
 
 ### Added
