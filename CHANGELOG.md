@@ -4,6 +4,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 
+
+## [1.0.1] - 2019-12-10
+
+### Changed
+-- [isuftin@usgs.gov] - pam.d system_auth and password_auth order of module loading
+
+### Removed
 -- [isuftin@usgs.gov] - Removed a seconday run of logrotate::global in the default
 recipe
 
