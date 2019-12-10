@@ -1627,13 +1627,13 @@ default['stig']['postfix']['readme_directory'] = '/usr/share/doc/postfix-2.6.6/R
 # Settings for /etc/pam.d/password-auth and /etc/pam.d/system-auth files
 default['stig']['pam_d']['config']['password_auth'] = [
   'auth        required      pam_env.so',
-  'auth        required      pam_faillock.so preauth audit silent deny=5 unlock_time=900',
   'auth        sufficient    pam_unix.so nullok try_first_pass',
-  'auth        sufficient    pam_faillock.so authsucc audit deny=5 unlock_time=900',
   'auth        requisite     pam_succeed_if.so uid >= 1000 quiet_success',
   'auth        required      pam_deny.so',
+  'auth        required      pam_faillock.so preauth audit silent deny=5 unlock_time=900',
   'auth        [success=1 default=bad] pam_unix.so',
   'auth        [default=die] pam_faillock.so authfail audit deny=5 unlock_time=900',
+  'auth        sufficient    pam_faillock.so authsucc audit deny=5 unlock_time=900',
   'account     required      pam_unix.so',
   'account     sufficient    pam_localuser.so',
   'account     sufficient    pam_succeed_if.so uid < 1000 quiet',
@@ -1650,13 +1650,13 @@ default['stig']['pam_d']['config']['password_auth'] = [
 
 default['stig']['pam_d']['config']['system_auth'] = [
   'auth        required      pam_env.so',
-  'auth        required      pam_faillock.so preauth audit silent deny=5 unlock_time=900',
   'auth        sufficient    pam_unix.so nullok try_first_pass',
-  'auth        sufficient    pam_faillock.so authsucc audit deny=5 unlock_time=900',
   'auth        requisite     pam_succeed_if.so uid >= 1000 quiet_success',
   'auth        required      pam_deny.so',
+  'auth        required      pam_faillock.so preauth audit silent deny=5 unlock_time=900',
   'auth        [success=1 default=bad] pam_unix.so',
   'auth        [default=die] pam_faillock.so authfail audit deny=5 unlock_time=900',
+  'auth        sufficient    pam_faillock.so authsucc audit deny=5 unlock_time=900',
   'account     required      pam_unix.so',
   'account     sufficient    pam_localuser.so',
   'account     sufficient    pam_succeed_if.so uid < 1000 quiet',

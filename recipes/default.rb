@@ -120,5 +120,3 @@ include_recipe 'stig::inittab'
 
 # RHEL7
 include_recipe 'stig::local_users'
-
-include_recipe 'logrotate::global'
