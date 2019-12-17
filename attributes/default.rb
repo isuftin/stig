@@ -19,6 +19,9 @@ default['stig']['limits'] = [
 # Audit configuration
 default['stig']['audits']['bash_timeout'] = 7200
 default['stig']['audits']['guard_timeout'] = 7200
+# Add path strings (allow wildcard) to ignore during audits recipe. Paths included
+# here will not be checked as orphans or world writeable permissions
+default['stig']['audits']['ignore_paths'] = []
 
 # Aide configuration
 # See https://linux.die.net/man/5/aide.conf

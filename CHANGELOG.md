@@ -5,6 +5,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 
 
+## [1.0.2] - 2019-12-17
+
+### Added
+-- [isuftin@usgs.gov] - Add path strings (allow wildcard) to ignore during audits
+  recipe. Paths included will not be checked as orphans or world writeable permissions
+  
 ## [1.0.1] - 2019-12-10
 
 ### Changed
