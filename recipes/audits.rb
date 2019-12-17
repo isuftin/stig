@@ -20,7 +20,7 @@
 # - Verify No UID 0 Accounts Exist Other Than root
 
 ignore_paths = ''
-node['stig']['audits']['ignore_paths'].each {|p| ignore_paths += "-not -path \"#{p}\" "}
+node['stig']['audits']['ignore_paths'].each { |p| ignore_paths += "-not -path \"#{p}\" " }
 
 bash 'remove_world_writable_flag_from_files' do
   user 'root'
