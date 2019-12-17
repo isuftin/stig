@@ -19,17 +19,20 @@
 # - Verify No Legacy "+" Entries Exist in /etc/group File
 # - Verify No UID 0 Accounts Exist Other Than root
 
+ignore_paths = ''
+node['stig']['audits']['ignore_paths'].each {|p| ignore_paths += "-not -path \"#{p}\" "}
+
 bash 'remove_world_writable_flag_from_files' do
   user 'root'
-  code "df --local -P | awk {'if (NR!=1) print $6'} | uniq | xargs -I '{}' find '{}' -xdev -type f -perm -0002 | while read fn ;do chmod o-w \"$fn\";done"
-  only_if "test -n \"$(df --local -P | awk {'if (NR!=1) print $6'} | uniq | xargs -I '{}' find '{}' -xdev -type f -perm -0002)\"", user: 'root'
+  code "df --local -P | awk {'if (NR!=1) print $6'} | uniq | xargs -I '{}' find '{}' #{ignore_paths} -xdev -type f -perm -0002 | while read fn ;do chmod o-w \"$fn\";done"
+  only_if "test -n \"$(df --local -P | awk {'if (NR!=1) print $6'} | uniq | xargs -I '{}' find '{}' #{ignore_paths} -xdev -type f -perm -0002)\"", user: 'root'
 end
 
 bash 'find user and group orphaned files and directories' do
   user 'root'
   timeout node['stig']['audits']['bash_timeout']
-  code "df --local -P | awk {'if (NR!=1) print $6'} | uniq | xargs -I '{}' find '{}' -xdev -ignore_readdir_race -nouser -nogroup | while read fn;do chown root:root \"$fn\";done"
-  only_if "test -n \"$(df --local -P | awk {'if (NR!=1) print $6'} | uniq | xargs -I '{}' find '{}' -xdev -ignore_readdir_race -nouser -nogroup)\"", user: 'root', timeout: node['stig']['audits']['guard_timeout']
+  code "df --local -P | awk {'if (NR!=1) print $6'} | uniq | xargs -I '{}' find '{}' #{ignore_paths} -xdev -ignore_readdir_race -nouser -nogroup | while read fn;do chown root:root \"$fn\";done"
+  only_if "test -n \"$(df --local -P | awk {'if (NR!=1) print $6'} | uniq | xargs -I '{}' find '{}' #{ignore_paths} -xdev -ignore_readdir_race -nouser -nogroup)\"", user: 'root', timeout: node['stig']['audits']['guard_timeout']
 end
 
 bash 'no_empty_passwd_fields' do
