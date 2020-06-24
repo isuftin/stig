@@ -33,6 +33,7 @@ default['stig']['aide']['database_out'] = 'file:@@{DBDIR}/aide.db.new.gz'
 default['stig']['aide']['gzip_dbout'] = true
 default['stig']['aide']['verbose'] = 5
 default['stig']['aide']['timeout'] = 7200
+default['stig']['aide']['set_update_cron'] = false
 default['stig']['aide']['report_url'] = [
   'file:@@{LOGDIR}/aide.log',
   'stdout'

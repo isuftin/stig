@@ -5,12 +5,22 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 
 
+## [1.0.3] - 2020-06-24
+
+### Added
+-- [isuftin@usgs.gov] - Add ability to set a crontab to update the AIDE database
+  every day at mignight UTC. By default this is disabled.
+
+### Changed
+-- [isuftin@usgs.gov] - Update dependencies for logrotate, rsyslog and auditd
+community cookbooks
+
 ## [1.0.2] - 2019-12-17
 
 ### Added
 -- [isuftin@usgs.gov] - Add path strings (allow wildcard) to ignore during audits
   recipe. Paths included will not be checked as orphans or world writeable permissions
-  
+
 ## [1.0.1] - 2019-12-10
 
 ### Changed

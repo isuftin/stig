@@ -16,9 +16,9 @@ Requirements
 - CentOS >= 7.1
 
 ### Cookbooks
-- auditd ~> 2.3.4
-- logrotate ~> 2.2.0
-- rsyslog ~> 6.0.7
+- auditd ~> 2.4.0
+- logrotate ~> 2.2.3
+- rsyslog ~> 7.0.1
 
 [Changelog](CHANGELOG.md)
 ---------
@@ -44,6 +44,8 @@ Attributes
 - `node['stig']['aide']['verbose']` = (Integer 0-255) Specifies the level of the messages that are written out. Default: 5
 
 - `node['stig']['aide']['report_url']` = (Array of Strings) Specifies where the output is sent. Default: [ 'file:@@{LOGDIR}/aide.log', 'stdout' ]
+
+- `node['stig']['aide']['set_update_cron']` = (Boolean) If true, a crontab will be created to update the AIDE database at midnight UTC every day. Default: false
 
 - `node['stig']['aide']['rules']` = (Hash) Defines additional rules to be used. The hash entry is in the form of Rule Name => definition. Default: See https://github.com/USGS-CIDA/stig/blob/master/attributes/default.rb]
 

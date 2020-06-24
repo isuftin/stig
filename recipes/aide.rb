@@ -108,6 +108,18 @@ cron 'aide_cron' do
   day '*'
   month '*'
   action :create
-  not_if 'crontab -u root -l | grep aide'
+  not_if 'crontab -u root -l | grep "aide_cron"'
   only_if { %w[rhel fedora centos redhat].include? platform }
+end
+
+cron 'aide_update_cron' do
+  command "/usr/sbin/aide --update || true && rm #{aide_db_path} -f; cp #{aide_db_out_path} #{aide_db_path} -f"
+  minute '0'
+  hour '0'
+  day '*'
+  month '*'
+  action :create
+  not_if 'crontab -u root -l | grep "aide_update_cron"'
+  only_if { %w[rhel fedora centos redhat].include? platform }
+  only_if { node['stig']['aide']['set_update_cron'] == true}
 end

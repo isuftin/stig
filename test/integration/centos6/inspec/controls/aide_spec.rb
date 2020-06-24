@@ -41,5 +41,13 @@ control 'aide' do
       its('months') { should cmp '*' }
       its('weekdays') { should cmp '*' }
     end
+
+    describe crontab('root').commands('/usr/sbin/aide --update || true && rm /var/lib/aide/aide.db.gz -f; cp /var/lib/aide/aide.db.new.gz /var/lib/aide/aide.db.gz -f')  do
+      its('minutes') { should cmp 0 }
+      its('hours') { should cmp 0 }
+      its('days') { should cmp '*' }
+      its('months') { should cmp '*' }
+      its('weekdays') { should cmp '*' }
+    end
   end
 end

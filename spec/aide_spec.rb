@@ -101,6 +101,16 @@ describe 'stig::aide CentOS 6.x' do
     )
   end
 
+  it 'checks for aide on a schedule' do
+    expect(chef_run).to create_cron('aide_cron').with(
+      command: '/usr/sbin/aide --update || true && rm /var/lib/aide/aide.db.gz -f; cp /var/lib/aide/aide.db.new.gz /var/lib/aide/aide.db.gz -f',
+      minute: '0',
+      hour: '0',
+      day: '*',
+      month: '*'
+    )
+  end
+
   it 'Does not create remote file on CentOS' do
     expect(chef_run).to_not create_remote_file('/var/lib/aide/aide.db').with(
       user: 'root',

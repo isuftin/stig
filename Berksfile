@@ -4,6 +4,6 @@ source 'https://supermarket.getchef.com'
 
 metadata
 
-cookbook 'auditd', '~> 2.3.4'
-cookbook 'logrotate', '~> 2.2.2'
-cookbook 'rsyslog', '~> 6.0.7'
+cookbook 'auditd', '~> 2.4.0'
+cookbook 'logrotate', '~> 2.2.3'
+cookbook 'rsyslog', '~> 7.0.1'
