@@ -121,5 +121,5 @@ cron 'aide_update_cron' do
   action :create
   not_if 'crontab -u root -l | grep "aide_update_cron"'
   only_if { %w[rhel fedora centos redhat].include? platform }
-  only_if { node['stig']['aide']['set_update_cron'] == true}
+  only_if { node['stig']['aide']['set_update_cron'] == true }
 end

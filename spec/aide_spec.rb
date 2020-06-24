@@ -4,7 +4,7 @@ describe 'stig::aide CentOS 7.x' do
   let(:chef_run) { ChefSpec::SoloRunner.new(platform: 'centos', version: '7.7.1908').converge('stig::aide') }
 
   before do
-    stub_command('crontab -u root -l | grep aide').and_return(false)
+    stub_command('crontab -u root -l | grep \"aide_cron\"').and_return(false)
   end
 
   # 1.3.1
@@ -61,7 +61,7 @@ describe 'stig::aide CentOS 6.x' do
   let(:chef_run) { ChefSpec::SoloRunner.new(platform: 'centos', version: '6.9').converge('stig::aide') }
 
   before do
-    stub_command('crontab -u root -l | grep aide').and_return(false)
+    stub_command('crontab -u root -l | grep \"aide_cron\"').and_return(false)
   end
 
   # 1.3.1
