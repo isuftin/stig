@@ -101,25 +101,16 @@ remote_file 'Copy new database to old' do
   action :nothing
 end
 
+aide_cron_cmd = '/usr/sbin/aide --check || true'
+
+aide_cron_cmd = "#{aide_cron_cmd} && /usr/sbin/aide --update || true && rm #{aide_db_path} -f; cp #{aide_db_out_path} #{aide_db_path} -f" if node['stig']['aide']['set_update_cron'] == true
+
 cron 'aide_cron' do
-  command '/usr/sbin/aide --check'
+  command aide_cron_cmd
   minute '0'
   hour '5'
   day '*'
   month '*'
   action :create
-  not_if 'crontab -u root -l | grep "aide_cron"'
   only_if { %w[rhel fedora centos redhat].include? platform }
-end
-
-cron 'aide_update_cron' do
-  command "/usr/sbin/aide --update || true && rm #{aide_db_path} -f; cp #{aide_db_out_path} #{aide_db_path} -f"
-  minute '0'
-  hour '0'
-  day '*'
-  month '*'
-  action :create
-  not_if 'crontab -u root -l | grep "aide_update_cron"'
-  only_if { %w[rhel fedora centos redhat].include? platform }
-  only_if { node['stig']['aide']['set_update_cron'] == true }
 end

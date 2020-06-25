@@ -45,7 +45,8 @@ Attributes
 
 - `node['stig']['aide']['report_url']` = (Array of Strings) Specifies where the output is sent. Default: [ 'file:@@{LOGDIR}/aide.log', 'stdout' ]
 
-- `node['stig']['aide']['set_update_cron']` = (Boolean) If true, a crontab will be created to update the AIDE database at midnight UTC every day. Default: false
+- `node['stig']['aide']['set_update_cron']` = (Boolean) If true, also update the database after the daily aide check so the next check will use
+  a fresh database
 
 - `node['stig']['aide']['rules']` = (Hash) Defines additional rules to be used. The hash entry is in the form of Rule Name => definition. Default: See https://github.com/USGS-CIDA/stig/blob/master/attributes/default.rb]
 

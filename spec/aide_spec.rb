@@ -4,7 +4,7 @@ describe 'stig::aide CentOS 7.x' do
   let(:chef_run) { ChefSpec::SoloRunner.new(platform: 'centos', version: '7.7.1908').converge('stig::aide') }
 
   before do
-    stub_command('crontab -u root -l | grep \"aide_cron\"').and_return(false)
+    stub_command('crontab -u root -l | grep "aide_cron"').and_return(false)
   end
 
   # 1.3.1
@@ -61,7 +61,7 @@ describe 'stig::aide CentOS 6.x' do
   let(:chef_run) { ChefSpec::SoloRunner.new(platform: 'centos', version: '6.9').converge('stig::aide') }
 
   before do
-    stub_command('crontab -u root -l | grep \"aide_cron\"').and_return(false)
+    stub_command('crontab -u root -l | grep "aide_cron"').and_return(false)
   end
 
   # 1.3.1
@@ -93,19 +93,9 @@ describe 'stig::aide CentOS 6.x' do
   # 1.3.2
   it 'checks for aide on a schedule' do
     expect(chef_run).to create_cron('aide_cron').with(
-      command: '/usr/sbin/aide --check',
+      command: '/usr/sbin/aide --check || true',
       minute: '0',
       hour: '5',
-      day: '*',
-      month: '*'
-    )
-  end
-
-  it 'checks for aide on a schedule' do
-    expect(chef_run).to create_cron('aide_cron').with(
-      command: '/usr/sbin/aide --update || true && rm /var/lib/aide/aide.db.gz -f; cp /var/lib/aide/aide.db.new.gz /var/lib/aide/aide.db.gz -f',
-      minute: '0',
-      hour: '0',
       day: '*',
       month: '*'
     )
