@@ -42,7 +42,7 @@ describe 'stig::aide CentOS 7.x' do
   # 1.3.2
   it 'checks for aide on a schedule' do
     expect(chef_run).to create_cron('aide_cron').with(
-      command: '/usr/sbin/aide --check',
+      command: '/usr/sbin/aide --check || true',
       minute: '0',
       hour: '5',
       day: '*',
