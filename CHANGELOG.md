@@ -8,8 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.0.3] - 2020-06-24
 
 ### Added
--- [isuftin@usgs.gov] - Add ability to set a crontab to update the AIDE database
-  every day at mignight UTC. By default this is disabled.
+-- [isuftin@usgs.gov] - Add ability to add AIDE database update to regulat crontab
 
 ### Changed
 -- [isuftin@usgs.gov] - Update dependencies for logrotate, rsyslog and auditd
